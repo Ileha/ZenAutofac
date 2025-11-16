@@ -4,7 +4,7 @@ using Autofac.Builder;
 using Autofac.Core;
 using JetBrains.Annotations;
 
-namespace ZenAutofac.Interfaces.Builders.Instance
+namespace ZenAutofac.API.Builders.Instance
 {
     public interface ISubScopeRegistrationBuilder<out TComponent> : IExtendedBuilderBase
         where TComponent : class, IDisposable

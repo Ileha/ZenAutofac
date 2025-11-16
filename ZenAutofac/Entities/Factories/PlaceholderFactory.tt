@@ -3,7 +3,7 @@
 <#@ output extension=".cs" #>
 <#@ import namespace="System.Linq" #>
 using System;
-using ZenAutofac.Interfaces;
+using ZenAutofac.API;
 
 namespace ZenAutofac.Entities.Factories
 {

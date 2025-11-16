@@ -1,8 +1,8 @@
 ﻿using System;
 using Autofac;
 using Autofac.Builder;
-using ZenAutofac.Interfaces;
-using ZenAutofac.Interfaces.Builders.Factory;
+using ZenAutofac.API;
+using ZenAutofac.API.Builders.Factory;
 
 namespace ZenAutofac.Builders.Factory
 {

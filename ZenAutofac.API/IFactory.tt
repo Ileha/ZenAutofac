@@ -2,7 +2,7 @@
 <#@ assembly name="System.Core" #>
 <#@ output extension=".cs" #>
 <#@ import namespace="System.Linq" #>
-namespace ZenAutofac.Interfaces
+namespace ZenAutofac.API
 {
     //generated amount <#@ include file="Constants.ttinclude" #><#= Constants.GenericParametersCount #>
 

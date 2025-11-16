@@ -2,7 +2,7 @@
 using Autofac;
 using Autofac.Core;
 using JetBrains.Annotations;
-using ZenAutofac.Interfaces;
+using ZenAutofac.API;
 
 namespace ZenAutofac.Entities.Factories
 {

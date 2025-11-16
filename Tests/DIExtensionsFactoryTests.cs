@@ -1,8 +1,8 @@
 ﻿using Autofac;
 using NSubstitute;
 using ZenAutofac;
+using ZenAutofac.API;
 using ZenAutofac.Entities.Factories;
-using ZenAutofac.Interfaces;
 
 namespace Tests;
 
