@@ -11,7 +11,7 @@ using ZenAutofac.Interfaces.Builders.Factory;
 
 namespace ZenAutofac.Builders.Factory
 {
-    //generated amount <#@ include file="../../Constants.ttinclude" #><#= Constants.GenericParametersCount #>
+    //generated amount <#@ include file="../../../ZenAutofac.API/Constants.ttinclude" #><#= Constants.GenericParametersCount #>
 
 <#
     for (var i = 0; i <= Constants.GenericParametersCount; i++)

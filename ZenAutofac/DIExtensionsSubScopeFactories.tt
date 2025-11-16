@@ -14,7 +14,7 @@ namespace ZenAutofac
 {
     public static partial class DIExtensions
     {
-        //generated amount <#@ include file="Constants.ttinclude" #><#= Constants.GenericParametersCount #>
+        //generated amount <#@ include file="../ZenAutofac.API/Constants.ttinclude" #><#= Constants.GenericParametersCount #>
 
 #region RegisterIFactoryExtended
 

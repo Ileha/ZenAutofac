@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <Nullable>disable</Nullable>
+        <TargetFrameworks>net8.0;net6.0;netstandard2.0;netstandard2.1</TargetFrameworks>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Update="Builders\Factory\IExtendedFactoryBuilder.tt">
+        <Generator>TextTemplatingFileGenerator</Generator>
+        <LastGenOutput>IExtendedFactoryBuilder.cs</LastGenOutput>
+      </None>
+      <None Update="Builders\Factory\ISubScopeFactoryBuilder.tt">
+        <Generator>TextTemplatingFileGenerator</Generator>
+        <LastGenOutput>ISubScopeFactoryBuilder.cs</LastGenOutput>
+      </None>
+      <None Update="IFactory.tt">
+        <Generator>TextTemplatingFileGenerator</Generator>
+        <LastGenOutput>IFactory.cs</LastGenOutput>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="IFactory.cs">
+        <DependentUpon>IFactory.tt</DependentUpon>
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+      </Compile>
+      <Compile Update="Builders\Factory\IExtendedFactoryBuilder.cs">
+        <DependentUpon>IExtendedFactoryBuilder.tt</DependentUpon>
+      </Compile>
+      <Compile Update="Builders\Factory\ISubScopeFactoryBuilder.cs">
+        <DependentUpon>ISubScopeFactoryBuilder.tt</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Autofac" Version="8.4.0" />
+      <PackageReference Include="JetBrains.Annotations" Version="2025.2.1" />
+    </ItemGroup>
+
+</Project>

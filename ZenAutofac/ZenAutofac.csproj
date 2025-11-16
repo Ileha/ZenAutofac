@@ -110,18 +110,6 @@ bugfix wrong order of IDisposables execution when harmony patched</PackageReleas
     </ItemGroup>
 
     <ItemGroup>
-        <None Update="Interfaces\IFactory.tt">
-            <Generator>TextTemplatingFileGenerator</Generator>
-            <LastGenOutput>IFactory.cs</LastGenOutput>
-        </None>
-    </ItemGroup>
-
-    <ItemGroup>
-        <Compile Update="Interfaces\IFactory.cs">
-            <DependentUpon>IFactory.tt</DependentUpon>
-            <DesignTime>True</DesignTime>
-            <AutoGen>True</AutoGen>
-        </Compile>
         <Compile Update="Entities\Factories\AutofacFunctionFactories.cs">
           <AutoGen>True</AutoGen>
           <DesignTime>True</DesignTime>
@@ -186,6 +174,10 @@ bugfix wrong order of IDisposables execution when harmony patched</PackageReleas
 
     <ItemGroup>
       <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ZenAutofac.API\ZenAutofac.API.csproj" />
     </ItemGroup>
 
 </Project>

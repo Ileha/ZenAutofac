@@ -10,7 +10,7 @@ using JetBrains.Annotations;
 
 namespace ZenAutofac.Interfaces.Builders.Factory
 {
-    //generated amount <#@ include file="../../../Constants.ttinclude" #><#= Constants.GenericParametersCount #>
+    //generated amount <#@ include file="../../Constants.ttinclude" #><#= Constants.GenericParametersCount #>
 
 <#
     for (var i = 0; i <= Constants.GenericParametersCount; i++)
