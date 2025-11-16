@@ -31,12 +31,15 @@ added builders
 move from installers to Autofac's modules
 ---
 version 2.0.1
-bugfix wrong order of IDisposables execution when harmony patched</PackageReleaseNotes>
+bugfix wrong order of IDisposables execution when harmony patched
+---
+version 2.0.2
+split to implemetation and API</PackageReleaseNotes>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <TargetFrameworks>net6.0;net8.0;netstandard2.0;netstandard2.1</TargetFrameworks>
         <PackageIcon>icon.png</PackageIcon>
-        <Version>2.0.1</Version>
+        <Version>2.0.2</Version>
         <AssemblyName>ZenAutofac</AssemblyName>
         <RootNamespace>ZenAutofac</RootNamespace>
         <Product>ZenAutofac</Product>
