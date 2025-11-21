@@ -1,6 +1,6 @@
 ﻿using System;
 using Autofac;
-using ZenAutofac.Interfaces;
+using ZenAutofac.API.Factory;
 
 namespace ZenAutofac.Entities.Factories
 {

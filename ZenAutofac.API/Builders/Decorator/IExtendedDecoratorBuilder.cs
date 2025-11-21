@@ -2,7 +2,7 @@
 using Autofac;
 using JetBrains.Annotations;
 
-namespace ZenAutofac.Interfaces.Builders.Decorator
+namespace ZenAutofac.API.Builders.Decorator
 {
     public interface IExtendedDecoratorBuilder<in TDecorator, out TService> : IExtendedBuilderBase
         where TDecorator : TService

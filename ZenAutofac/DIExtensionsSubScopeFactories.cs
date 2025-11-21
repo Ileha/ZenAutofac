@@ -3,8 +3,8 @@ using Autofac;
 using Autofac.Builder;
 using ZenAutofac.Builders.Factory;
 using ZenAutofac.Entities.Factories;
-using ZenAutofac.Interfaces;
-using ZenAutofac.Interfaces.Builders.Factory;
+using ZenAutofac.API.Builders.Factory;
+using ZenAutofac.API.Factory;
 
 namespace ZenAutofac
 {

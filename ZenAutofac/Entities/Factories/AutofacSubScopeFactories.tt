@@ -6,13 +6,13 @@ using System;
 using Autofac;
 using Autofac.Core;
 using JetBrains.Annotations;
-using ZenAutofac.Interfaces;
+using ZenAutofac.API.Factory;
 
 namespace ZenAutofac.Entities.Factories
 {
     public static partial class DIExtensions
     {
-        //generated amount <#@ include file="../../Constants.ttinclude" #><#= Constants.GenericParametersCount #>
+        //generated amount <#@ include file="../../../ZenAutofac.API/Constants.ttinclude" #><#= Constants.GenericParametersCount #>
 
 <#
     for (var i = 0; i <= Constants.GenericParametersCount; i++)

@@ -3,8 +3,9 @@ using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
 using JetBrains.Annotations;
+using ZenAutofac.API.Factory;
 
-namespace ZenAutofac.Interfaces.Builders.Factory
+namespace ZenAutofac.API.Builders.Factory
 {
     //generated amount 10
 

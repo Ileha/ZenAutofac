@@ -1,6 +1,6 @@
 ﻿using System;
 using Autofac;
-using ZenAutofac.Interfaces.Builders.Instance;
+using ZenAutofac.API.Builders.Instance;
 
 namespace ZenAutofac.Builders.Instance
 {

@@ -2,7 +2,7 @@
 using Autofac;
 using Autofac.Core;
 using JetBrains.Annotations;
-using ZenAutofac.Interfaces.Builders.Decorator;
+using ZenAutofac.API.Builders.Decorator;
 
 namespace ZenAutofac.Builders.Decorator
 {

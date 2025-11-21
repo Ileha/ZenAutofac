@@ -31,12 +31,15 @@ added builders
 move from installers to Autofac's modules
 ---
 version 2.0.1
-bugfix wrong order of IDisposables execution when harmony patched</PackageReleaseNotes>
+bugfix wrong order of IDisposables execution when harmony patched
+---
+version 2.0.2
+split to implemetation and API</PackageReleaseNotes>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <TargetFrameworks>net6.0;net8.0;netstandard2.0;netstandard2.1</TargetFrameworks>
         <PackageIcon>icon.png</PackageIcon>
-        <Version>2.0.1</Version>
+        <Version>2.0.2</Version>
         <AssemblyName>ZenAutofac</AssemblyName>
         <RootNamespace>ZenAutofac</RootNamespace>
         <Product>ZenAutofac</Product>
@@ -110,18 +113,6 @@ bugfix wrong order of IDisposables execution when harmony patched</PackageReleas
     </ItemGroup>
 
     <ItemGroup>
-        <None Update="Interfaces\IFactory.tt">
-            <Generator>TextTemplatingFileGenerator</Generator>
-            <LastGenOutput>IFactory.cs</LastGenOutput>
-        </None>
-    </ItemGroup>
-
-    <ItemGroup>
-        <Compile Update="Interfaces\IFactory.cs">
-            <DependentUpon>IFactory.tt</DependentUpon>
-            <DesignTime>True</DesignTime>
-            <AutoGen>True</AutoGen>
-        </Compile>
         <Compile Update="Entities\Factories\AutofacFunctionFactories.cs">
           <AutoGen>True</AutoGen>
           <DesignTime>True</DesignTime>
@@ -186,6 +177,10 @@ bugfix wrong order of IDisposables execution when harmony patched</PackageReleas
 
     <ItemGroup>
       <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ZenAutofac.API\ZenAutofac.API.csproj" />
     </ItemGroup>
 
 </Project>

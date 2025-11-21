@@ -1,6 +1,6 @@
 ﻿using Autofac;
 
-namespace ZenAutofac.Interfaces.Builders
+namespace ZenAutofac.API.Builders
 {
     public interface IExtendedBuilderBase
     {
