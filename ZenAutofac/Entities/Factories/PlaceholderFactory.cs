@@ -1,5 +1,5 @@
 ﻿using System;
-using ZenAutofac.API;
+using ZenAutofac.API.Factory;
 
 namespace ZenAutofac.Entities.Factories
 {

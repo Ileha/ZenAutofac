@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using NSubstitute;
 using ZenAutofac;
-using ZenAutofac.API;
+using ZenAutofac.API.Factory;
 
 namespace Tests.Integration;
 

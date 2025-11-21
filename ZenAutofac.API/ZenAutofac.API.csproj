@@ -40,10 +40,6 @@ split to implemetation and API</PackageReleaseNotes>
         <Generator>TextTemplatingFileGenerator</Generator>
         <LastGenOutput>ISubScopeFactoryBuilder.cs</LastGenOutput>
       </None>
-      <None Update="IFactory.tt">
-        <Generator>TextTemplatingFileGenerator</Generator>
-        <LastGenOutput>IFactory.cs</LastGenOutput>
-      </None>
       <None Include="..\icon.png">
         <Pack>True</Pack>
         <PackagePath></PackagePath>
@@ -52,11 +48,6 @@ split to implemetation and API</PackageReleaseNotes>
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="IFactory.cs">
-        <DependentUpon>IFactory.tt</DependentUpon>
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-      </Compile>
       <Compile Update="Builders\Factory\IExtendedFactoryBuilder.cs">
         <DependentUpon>IExtendedFactoryBuilder.tt</DependentUpon>
       </Compile>
@@ -68,6 +59,10 @@ split to implemetation and API</PackageReleaseNotes>
     <ItemGroup>
       <PackageReference Include="Autofac" Version="8.4.0" />
       <PackageReference Include="JetBrains.Annotations" Version="2025.2.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ZenAutofac.API.Factory\ZenAutofac.API.Factory.csproj" />
     </ItemGroup>
 
 </Project>

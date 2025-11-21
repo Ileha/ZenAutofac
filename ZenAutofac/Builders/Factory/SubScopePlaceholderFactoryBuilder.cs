@@ -4,8 +4,8 @@ using Autofac.Builder;
 using Autofac.Core;
 using ZenAutofac.Entities.Factories;
 using ZenAutofac.Extensions.HarmonyPatcher;
-using ZenAutofac.API;
 using ZenAutofac.API.Builders.Factory;
+using ZenAutofac.API.Factory;
 
 namespace ZenAutofac.Builders.Factory
 {

@@ -2,8 +2,8 @@
 using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
-using ZenAutofac.API;
 using ZenAutofac.API.Builders.Factory;
+using ZenAutofac.API.Factory;
 
 namespace ZenAutofac.Builders.Factory
 {

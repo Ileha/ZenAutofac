@@ -3,6 +3,7 @@ using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
 using JetBrains.Annotations;
+using ZenAutofac.API.Factory;
 
 namespace ZenAutofac.API.Builders.Factory
 {

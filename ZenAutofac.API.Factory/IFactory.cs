@@ -1,4 +1,4 @@
-﻿namespace ZenAutofac.API
+﻿namespace ZenAutofac.API.Factory
 {
     //generated amount 10
 
