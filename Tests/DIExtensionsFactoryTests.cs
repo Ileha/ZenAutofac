@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Autofac.Core;
 using NSubstitute;
 using ZenAutofac;
 using ZenAutofac.Entities.Factories;
@@ -46,15 +47,34 @@ public class DIExtensionsFactoryTests
         public SimpleService Dependency { get; }
     }
 
-    public class ServiceWithDependencyDisposable : ServiceWithDependency, IDisposable
+    public class ServiceWithDependencyDisposable : ServiceWithDependency, IDisposer
     {
+        private readonly IDisposer _disposerImplementation;
+
         public ServiceWithDependencyDisposable(SimpleService dependency)
             : base(dependency)
         {
+            _disposerImplementation = new ZenAutofac.Entities.Disposer();
+        }
+
+        public ValueTask DisposeAsync()
+        {
+            return _disposerImplementation.DisposeAsync();
+        }
+
+        public void AddInstanceForDisposal(IDisposable instance)
+        {
+            _disposerImplementation.AddInstanceForDisposal(instance);
+        }
+
+        public void AddInstanceForAsyncDisposal(IAsyncDisposable instance)
+        {
+            _disposerImplementation.AddInstanceForAsyncDisposal(instance);
         }
 
         public void Dispose()
         {
+            _disposerImplementation.Dispose();
         }
     }
 

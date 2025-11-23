@@ -1,6 +1,8 @@
 ﻿using Autofac;
+using Autofac.Core;
 using NSubstitute;
 using ZenAutofac;
+using ZenAutofac.Entities;
 using ZenAutofac.Interfaces;
 
 namespace Tests.Integration;
@@ -152,7 +154,7 @@ public class DecoratorDisposeTests
         receiver.Received(1).ReceiveDispose();
     }
 
-    public class SubContainerDataExtractor<T> : IDisposable
+    public class SubContainerDataExtractor<T> : Disposer
     {
         public readonly T Data;
 
@@ -160,18 +162,14 @@ public class DecoratorDisposeTests
         {
             Data = data;
         }
-
-        public void Dispose()
-        {
-        }
     }
 
-    public interface ISampleReturn : IDisposable
+    public interface ISampleReturn : IDisposer
     {
         string GetData();
     }
 
-    public class SampleReturn : ISampleReturn
+    public class SampleReturn : Disposer, ISampleReturn
     {
         private readonly string _data;
 
@@ -184,13 +182,9 @@ public class DecoratorDisposeTests
         {
             return _data;
         }
-
-        public void Dispose()
-        {
-        }
     }
 
-    public class SampleReturnDecorator : ISampleReturn
+    public class SampleReturnDecorator : Disposer, ISampleReturn
     {
         private readonly ISampleReturn _baseService;
 
@@ -204,9 +198,12 @@ public class DecoratorDisposeTests
             return string.Format(DecoratedDataFormat, _baseService.GetData());
         }
 
-        public void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            _baseService.Dispose();
+            if (disposing)
+                _baseService.Dispose();
+
+            base.Dispose(disposing);
         }
     }
 

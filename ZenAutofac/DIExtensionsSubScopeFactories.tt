@@ -5,6 +5,7 @@
 using System;
 using Autofac;
 using Autofac.Builder;
+using Autofac.Core;
 using ZenAutofac.Builders.Factory;
 using ZenAutofac.Entities.Factories;
 using ZenAutofac.Interfaces;
@@ -50,7 +51,7 @@ namespace ZenAutofac
             IFactory<<#=string.Join(", ", Enumerable.Repeat(0, i).Select((_, j) => $"TP{j}")) #><#= i == 0 ? "" : ", " #>TInstance>,
             ConcreteReflectionActivatorData> FromSubScope<<#=string.Join(", ", Enumerable.Repeat(0, i).Select((_, j) => $"TP{j}")) #><#= i == 0 ? "" : ", " #>TInstance, TActivatorData>(
                 this IExtendedFactoryBuilder<<#=string.Join(", ", Enumerable.Repeat(0, i).Select((_, j) => $"TP{j}")) #><#= i == 0 ? "" : ", " #>TInstance, IFactory<<#=string.Join(", ", Enumerable.Repeat(0, i).Select((_, j) => $"TP{j}")) #><#= i == 0 ? "" : ", " #>TInstance>, TActivatorData> builder)
-            where TInstance : class, IDisposable
+            where TInstance : class, IDisposer
         {
             if (builder is null)
                 throw new ArgumentNullException(nameof(builder));
@@ -98,7 +99,7 @@ namespace ZenAutofac
             TPlaceholderFactory,
             SimpleActivatorData> FromSubScope<<#=string.Join(", ", Enumerable.Repeat(0, i).Select((_, j) => $"TP{j}")) #><#= i == 0 ? "" : ", " #>TInstance, TPlaceholderFactory, TActivatorData>(
                 this IExtendedFactoryBuilder<<#=string.Join(", ", Enumerable.Repeat(0, i).Select((_, j) => $"TP{j}")) #><#= i == 0 ? "" : ", " #>TInstance, TPlaceholderFactory, TActivatorData> builder)
-            where TInstance : class, IDisposable
+            where TInstance : class, IDisposer
             where TPlaceholderFactory : PlaceholderFactory<<#=string.Join(", ", Enumerable.Repeat(0, i).Select((_, j) => $"TP{j}")) #><#= i == 0 ? "" : ", " #>TInstance>
         {
             if (builder is null)

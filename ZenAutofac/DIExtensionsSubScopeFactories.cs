@@ -1,6 +1,7 @@
 ﻿using System;
 using Autofac;
 using Autofac.Builder;
+using Autofac.Core;
 using ZenAutofac.Builders.Factory;
 using ZenAutofac.Entities.Factories;
 using ZenAutofac.Interfaces;
@@ -210,7 +211,7 @@ namespace ZenAutofac
             IFactory<TInstance>,
             ConcreteReflectionActivatorData> FromSubScope<TInstance, TActivatorData>(
                 this IExtendedFactoryBuilder<TInstance, IFactory<TInstance>, TActivatorData> builder)
-            where TInstance : class, IDisposable
+            where TInstance : class, IDisposer
         {
             if (builder is null)
                 throw new ArgumentNullException(nameof(builder));
@@ -224,7 +225,7 @@ namespace ZenAutofac
             IFactory<TP0, TInstance>,
             ConcreteReflectionActivatorData> FromSubScope<TP0, TInstance, TActivatorData>(
                 this IExtendedFactoryBuilder<TP0, TInstance, IFactory<TP0, TInstance>, TActivatorData> builder)
-            where TInstance : class, IDisposable
+            where TInstance : class, IDisposer
         {
             if (builder is null)
                 throw new ArgumentNullException(nameof(builder));
@@ -239,7 +240,7 @@ namespace ZenAutofac
             IFactory<TP0, TP1, TInstance>,
             ConcreteReflectionActivatorData> FromSubScope<TP0, TP1, TInstance, TActivatorData>(
                 this IExtendedFactoryBuilder<TP0, TP1, TInstance, IFactory<TP0, TP1, TInstance>, TActivatorData> builder)
-            where TInstance : class, IDisposable
+            where TInstance : class, IDisposer
         {
             if (builder is null)
                 throw new ArgumentNullException(nameof(builder));
@@ -255,7 +256,7 @@ namespace ZenAutofac
             IFactory<TP0, TP1, TP2, TInstance>,
             ConcreteReflectionActivatorData> FromSubScope<TP0, TP1, TP2, TInstance, TActivatorData>(
                 this IExtendedFactoryBuilder<TP0, TP1, TP2, TInstance, IFactory<TP0, TP1, TP2, TInstance>, TActivatorData> builder)
-            where TInstance : class, IDisposable
+            where TInstance : class, IDisposer
         {
             if (builder is null)
                 throw new ArgumentNullException(nameof(builder));
@@ -272,7 +273,7 @@ namespace ZenAutofac
             IFactory<TP0, TP1, TP2, TP3, TInstance>,
             ConcreteReflectionActivatorData> FromSubScope<TP0, TP1, TP2, TP3, TInstance, TActivatorData>(
                 this IExtendedFactoryBuilder<TP0, TP1, TP2, TP3, TInstance, IFactory<TP0, TP1, TP2, TP3, TInstance>, TActivatorData> builder)
-            where TInstance : class, IDisposable
+            where TInstance : class, IDisposer
         {
             if (builder is null)
                 throw new ArgumentNullException(nameof(builder));
@@ -290,7 +291,7 @@ namespace ZenAutofac
             IFactory<TP0, TP1, TP2, TP3, TP4, TInstance>,
             ConcreteReflectionActivatorData> FromSubScope<TP0, TP1, TP2, TP3, TP4, TInstance, TActivatorData>(
                 this IExtendedFactoryBuilder<TP0, TP1, TP2, TP3, TP4, TInstance, IFactory<TP0, TP1, TP2, TP3, TP4, TInstance>, TActivatorData> builder)
-            where TInstance : class, IDisposable
+            where TInstance : class, IDisposer
         {
             if (builder is null)
                 throw new ArgumentNullException(nameof(builder));
@@ -309,7 +310,7 @@ namespace ZenAutofac
             IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TInstance>,
             ConcreteReflectionActivatorData> FromSubScope<TP0, TP1, TP2, TP3, TP4, TP5, TInstance, TActivatorData>(
                 this IExtendedFactoryBuilder<TP0, TP1, TP2, TP3, TP4, TP5, TInstance, IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TInstance>, TActivatorData> builder)
-            where TInstance : class, IDisposable
+            where TInstance : class, IDisposer
         {
             if (builder is null)
                 throw new ArgumentNullException(nameof(builder));
@@ -329,7 +330,7 @@ namespace ZenAutofac
             IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TInstance>,
             ConcreteReflectionActivatorData> FromSubScope<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TInstance, TActivatorData>(
                 this IExtendedFactoryBuilder<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TInstance, IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TInstance>, TActivatorData> builder)
-            where TInstance : class, IDisposable
+            where TInstance : class, IDisposer
         {
             if (builder is null)
                 throw new ArgumentNullException(nameof(builder));
@@ -350,7 +351,7 @@ namespace ZenAutofac
             IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TInstance>,
             ConcreteReflectionActivatorData> FromSubScope<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TInstance, TActivatorData>(
                 this IExtendedFactoryBuilder<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TInstance, IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TInstance>, TActivatorData> builder)
-            where TInstance : class, IDisposable
+            where TInstance : class, IDisposer
         {
             if (builder is null)
                 throw new ArgumentNullException(nameof(builder));
@@ -372,7 +373,7 @@ namespace ZenAutofac
             IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TInstance>,
             ConcreteReflectionActivatorData> FromSubScope<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TInstance, TActivatorData>(
                 this IExtendedFactoryBuilder<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TInstance, IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TInstance>, TActivatorData> builder)
-            where TInstance : class, IDisposable
+            where TInstance : class, IDisposer
         {
             if (builder is null)
                 throw new ArgumentNullException(nameof(builder));
@@ -395,7 +396,7 @@ namespace ZenAutofac
             IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TInstance>,
             ConcreteReflectionActivatorData> FromSubScope<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TInstance, TActivatorData>(
                 this IExtendedFactoryBuilder<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TInstance, IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TInstance>, TActivatorData> builder)
-            where TInstance : class, IDisposable
+            where TInstance : class, IDisposer
         {
             if (builder is null)
                 throw new ArgumentNullException(nameof(builder));
@@ -614,7 +615,7 @@ namespace ZenAutofac
             TPlaceholderFactory,
             SimpleActivatorData> FromSubScope<TInstance, TPlaceholderFactory, TActivatorData>(
                 this IExtendedFactoryBuilder<TInstance, TPlaceholderFactory, TActivatorData> builder)
-            where TInstance : class, IDisposable
+            where TInstance : class, IDisposer
             where TPlaceholderFactory : PlaceholderFactory<TInstance>
         {
             if (builder is null)
@@ -629,7 +630,7 @@ namespace ZenAutofac
             TPlaceholderFactory,
             SimpleActivatorData> FromSubScope<TP0, TInstance, TPlaceholderFactory, TActivatorData>(
                 this IExtendedFactoryBuilder<TP0, TInstance, TPlaceholderFactory, TActivatorData> builder)
-            where TInstance : class, IDisposable
+            where TInstance : class, IDisposer
             where TPlaceholderFactory : PlaceholderFactory<TP0, TInstance>
         {
             if (builder is null)
@@ -645,7 +646,7 @@ namespace ZenAutofac
             TPlaceholderFactory,
             SimpleActivatorData> FromSubScope<TP0, TP1, TInstance, TPlaceholderFactory, TActivatorData>(
                 this IExtendedFactoryBuilder<TP0, TP1, TInstance, TPlaceholderFactory, TActivatorData> builder)
-            where TInstance : class, IDisposable
+            where TInstance : class, IDisposer
             where TPlaceholderFactory : PlaceholderFactory<TP0, TP1, TInstance>
         {
             if (builder is null)
@@ -662,7 +663,7 @@ namespace ZenAutofac
             TPlaceholderFactory,
             SimpleActivatorData> FromSubScope<TP0, TP1, TP2, TInstance, TPlaceholderFactory, TActivatorData>(
                 this IExtendedFactoryBuilder<TP0, TP1, TP2, TInstance, TPlaceholderFactory, TActivatorData> builder)
-            where TInstance : class, IDisposable
+            where TInstance : class, IDisposer
             where TPlaceholderFactory : PlaceholderFactory<TP0, TP1, TP2, TInstance>
         {
             if (builder is null)
@@ -680,7 +681,7 @@ namespace ZenAutofac
             TPlaceholderFactory,
             SimpleActivatorData> FromSubScope<TP0, TP1, TP2, TP3, TInstance, TPlaceholderFactory, TActivatorData>(
                 this IExtendedFactoryBuilder<TP0, TP1, TP2, TP3, TInstance, TPlaceholderFactory, TActivatorData> builder)
-            where TInstance : class, IDisposable
+            where TInstance : class, IDisposer
             where TPlaceholderFactory : PlaceholderFactory<TP0, TP1, TP2, TP3, TInstance>
         {
             if (builder is null)
@@ -699,7 +700,7 @@ namespace ZenAutofac
             TPlaceholderFactory,
             SimpleActivatorData> FromSubScope<TP0, TP1, TP2, TP3, TP4, TInstance, TPlaceholderFactory, TActivatorData>(
                 this IExtendedFactoryBuilder<TP0, TP1, TP2, TP3, TP4, TInstance, TPlaceholderFactory, TActivatorData> builder)
-            where TInstance : class, IDisposable
+            where TInstance : class, IDisposer
             where TPlaceholderFactory : PlaceholderFactory<TP0, TP1, TP2, TP3, TP4, TInstance>
         {
             if (builder is null)
@@ -719,7 +720,7 @@ namespace ZenAutofac
             TPlaceholderFactory,
             SimpleActivatorData> FromSubScope<TP0, TP1, TP2, TP3, TP4, TP5, TInstance, TPlaceholderFactory, TActivatorData>(
                 this IExtendedFactoryBuilder<TP0, TP1, TP2, TP3, TP4, TP5, TInstance, TPlaceholderFactory, TActivatorData> builder)
-            where TInstance : class, IDisposable
+            where TInstance : class, IDisposer
             where TPlaceholderFactory : PlaceholderFactory<TP0, TP1, TP2, TP3, TP4, TP5, TInstance>
         {
             if (builder is null)
@@ -740,7 +741,7 @@ namespace ZenAutofac
             TPlaceholderFactory,
             SimpleActivatorData> FromSubScope<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TInstance, TPlaceholderFactory, TActivatorData>(
                 this IExtendedFactoryBuilder<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TInstance, TPlaceholderFactory, TActivatorData> builder)
-            where TInstance : class, IDisposable
+            where TInstance : class, IDisposer
             where TPlaceholderFactory : PlaceholderFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TInstance>
         {
             if (builder is null)
@@ -762,7 +763,7 @@ namespace ZenAutofac
             TPlaceholderFactory,
             SimpleActivatorData> FromSubScope<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TInstance, TPlaceholderFactory, TActivatorData>(
                 this IExtendedFactoryBuilder<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TInstance, TPlaceholderFactory, TActivatorData> builder)
-            where TInstance : class, IDisposable
+            where TInstance : class, IDisposer
             where TPlaceholderFactory : PlaceholderFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TInstance>
         {
             if (builder is null)
@@ -785,7 +786,7 @@ namespace ZenAutofac
             TPlaceholderFactory,
             SimpleActivatorData> FromSubScope<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TInstance, TPlaceholderFactory, TActivatorData>(
                 this IExtendedFactoryBuilder<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TInstance, TPlaceholderFactory, TActivatorData> builder)
-            where TInstance : class, IDisposable
+            where TInstance : class, IDisposer
             where TPlaceholderFactory : PlaceholderFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TInstance>
         {
             if (builder is null)
@@ -809,7 +810,7 @@ namespace ZenAutofac
             TPlaceholderFactory,
             SimpleActivatorData> FromSubScope<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TInstance, TPlaceholderFactory, TActivatorData>(
                 this IExtendedFactoryBuilder<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TInstance, TPlaceholderFactory, TActivatorData> builder)
-            where TInstance : class, IDisposable
+            where TInstance : class, IDisposer
             where TPlaceholderFactory : PlaceholderFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TInstance>
         {
             if (builder is null)

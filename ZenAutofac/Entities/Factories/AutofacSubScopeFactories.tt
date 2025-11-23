@@ -20,7 +20,7 @@ namespace ZenAutofac.Entities.Factories
 #>
         internal class AutofacSubScopeFactory<<#=string.Join(", ", Enumerable.Repeat(0, i).Select((_, j) => $"TP{j}")) #><#= i == 0 ? "" : ", " #>TInstance>
             : IFactory<<#=string.Join(", ", Enumerable.Repeat(0, i).Select((_, j) => $"TP{j}")) #><#= i == 0 ? "" : ", " #>TInstance>
-            where TInstance : IDisposable
+            where TInstance : IDisposer
         {
             private readonly ILifetimeScope _scope;
             private readonly Action<ContainerBuilder<#= i == 0 ? "" : ", " #><#=
@@ -50,7 +50,7 @@ namespace ZenAutofac.Entities.Factories
 #>
         internal class AutofacSubScopeModuleFactory<<#=string.Join(", ", Enumerable.Repeat(0, i).Select((_, j) => $"TP{j}")) #><#= i == 0 ? "" : ", " #>TInstance, TModule>
             : IFactory<<#=string.Join(", ", Enumerable.Repeat(0, i).Select((_, j) => $"TP{j}")) #><#= i == 0 ? "" : ", " #>TInstance>
-            where TInstance : IDisposable
+            where TInstance : IDisposer
             where TModule : class, IModule
         {
             private readonly ILifetimeScope _scope;

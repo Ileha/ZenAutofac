@@ -8,7 +8,7 @@ namespace ZenAutofac.Builders.Instance
 {
     public class SubScopeRegistrationBuilder<TComponent>
         : ISubScopeRegistrationBuilder<TComponent>
-        where TComponent : class, IDisposable
+        where TComponent : class, IDisposer
     {
         public ContainerBuilder Builder { get; }
 

@@ -7,7 +7,7 @@ using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
 using ZenAutofac.Entities.Factories;
-using ZenAutofac.Extensions.HarmonyPatcher;
+using ZenAutofac.Extensions;
 using ZenAutofac.Interfaces;
 using ZenAutofac.Interfaces.Builders.Factory;
 
@@ -21,7 +21,7 @@ namespace ZenAutofac.Builders.Factory
 #>
     public class SubScopePlaceholderFactoryBuilder<<#=string.Join(", ", Enumerable.Repeat(0, i).Select((_, j) => $"TP{j}")) #><#= i == 0 ? "" : ", " #>TInstance, TPlaceholderFactory>
         : ISubScopeFactoryBuilder<<#=string.Join(", ", Enumerable.Repeat(0, i).Select((_, j) => $"TP{j}")) #><#= i == 0 ? "" : ", " #>TInstance, TPlaceholderFactory, SimpleActivatorData>
-        where TInstance : class, IDisposable
+        where TInstance : class, IDisposer
         where TPlaceholderFactory : PlaceholderFactory<<#=string.Join(", ", Enumerable.Repeat(0, i).Select((_, j) => $"TP{j}")) #><#= i == 0 ? "" : ", " #>TInstance>
     {
         public ContainerBuilder Builder { get; }
@@ -57,7 +57,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -91,7 +91,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });

@@ -105,7 +105,6 @@ bugfix wrong order of IDisposables execution when harmony patched</PackageReleas
     <ItemGroup>
         <PackageReference Include="Autofac" Version="8.4.0" />
         <PackageReference Include="JetBrains.Annotations" Version="2025.2.1" />
-        <PackageReference Include="Lib.Harmony" Version="2.4.1" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.8" />
     </ItemGroup>
 

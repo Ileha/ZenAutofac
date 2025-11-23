@@ -2,7 +2,7 @@
 using Autofac;
 using Autofac.Builder;
 using ZenAutofac.Entities.Factories;
-using ZenAutofac.Extensions.HarmonyPatcher;
+using ZenAutofac.Extensions;
 using ZenAutofac.Interfaces;
 using ZenAutofac.Interfaces.Builders.Factory;
 
@@ -46,7 +46,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -76,7 +76,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -119,7 +119,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -149,7 +149,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -192,7 +192,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -222,7 +222,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -265,7 +265,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -295,7 +295,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -338,7 +338,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -368,7 +368,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -411,7 +411,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -441,7 +441,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -484,7 +484,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -514,7 +514,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -557,7 +557,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -587,7 +587,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -630,7 +630,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -660,7 +660,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -703,7 +703,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -733,7 +733,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -776,7 +776,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -806,7 +806,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });

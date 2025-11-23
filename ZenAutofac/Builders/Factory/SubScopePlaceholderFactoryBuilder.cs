@@ -3,7 +3,7 @@ using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
 using ZenAutofac.Entities.Factories;
-using ZenAutofac.Extensions.HarmonyPatcher;
+using ZenAutofac.Extensions;
 using ZenAutofac.Interfaces;
 using ZenAutofac.Interfaces.Builders.Factory;
 
@@ -13,7 +13,7 @@ namespace ZenAutofac.Builders.Factory
 
     public class SubScopePlaceholderFactoryBuilder<TInstance, TPlaceholderFactory>
         : ISubScopeFactoryBuilder<TInstance, TPlaceholderFactory, SimpleActivatorData>
-        where TInstance : class, IDisposable
+        where TInstance : class, IDisposer
         where TPlaceholderFactory : PlaceholderFactory<TInstance>
     {
         public ContainerBuilder Builder { get; }
@@ -49,7 +49,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -83,7 +83,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -92,7 +92,7 @@ namespace ZenAutofac.Builders.Factory
 
     public class SubScopePlaceholderFactoryBuilder<TP0, TInstance, TPlaceholderFactory>
         : ISubScopeFactoryBuilder<TP0, TInstance, TPlaceholderFactory, SimpleActivatorData>
-        where TInstance : class, IDisposable
+        where TInstance : class, IDisposer
         where TPlaceholderFactory : PlaceholderFactory<TP0, TInstance>
     {
         public ContainerBuilder Builder { get; }
@@ -128,7 +128,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -162,7 +162,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -171,7 +171,7 @@ namespace ZenAutofac.Builders.Factory
 
     public class SubScopePlaceholderFactoryBuilder<TP0, TP1, TInstance, TPlaceholderFactory>
         : ISubScopeFactoryBuilder<TP0, TP1, TInstance, TPlaceholderFactory, SimpleActivatorData>
-        where TInstance : class, IDisposable
+        where TInstance : class, IDisposer
         where TPlaceholderFactory : PlaceholderFactory<TP0, TP1, TInstance>
     {
         public ContainerBuilder Builder { get; }
@@ -207,7 +207,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -241,7 +241,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -250,7 +250,7 @@ namespace ZenAutofac.Builders.Factory
 
     public class SubScopePlaceholderFactoryBuilder<TP0, TP1, TP2, TInstance, TPlaceholderFactory>
         : ISubScopeFactoryBuilder<TP0, TP1, TP2, TInstance, TPlaceholderFactory, SimpleActivatorData>
-        where TInstance : class, IDisposable
+        where TInstance : class, IDisposer
         where TPlaceholderFactory : PlaceholderFactory<TP0, TP1, TP2, TInstance>
     {
         public ContainerBuilder Builder { get; }
@@ -286,7 +286,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -320,7 +320,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -329,7 +329,7 @@ namespace ZenAutofac.Builders.Factory
 
     public class SubScopePlaceholderFactoryBuilder<TP0, TP1, TP2, TP3, TInstance, TPlaceholderFactory>
         : ISubScopeFactoryBuilder<TP0, TP1, TP2, TP3, TInstance, TPlaceholderFactory, SimpleActivatorData>
-        where TInstance : class, IDisposable
+        where TInstance : class, IDisposer
         where TPlaceholderFactory : PlaceholderFactory<TP0, TP1, TP2, TP3, TInstance>
     {
         public ContainerBuilder Builder { get; }
@@ -365,7 +365,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -399,7 +399,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -408,7 +408,7 @@ namespace ZenAutofac.Builders.Factory
 
     public class SubScopePlaceholderFactoryBuilder<TP0, TP1, TP2, TP3, TP4, TInstance, TPlaceholderFactory>
         : ISubScopeFactoryBuilder<TP0, TP1, TP2, TP3, TP4, TInstance, TPlaceholderFactory, SimpleActivatorData>
-        where TInstance : class, IDisposable
+        where TInstance : class, IDisposer
         where TPlaceholderFactory : PlaceholderFactory<TP0, TP1, TP2, TP3, TP4, TInstance>
     {
         public ContainerBuilder Builder { get; }
@@ -444,7 +444,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -478,7 +478,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -487,7 +487,7 @@ namespace ZenAutofac.Builders.Factory
 
     public class SubScopePlaceholderFactoryBuilder<TP0, TP1, TP2, TP3, TP4, TP5, TInstance, TPlaceholderFactory>
         : ISubScopeFactoryBuilder<TP0, TP1, TP2, TP3, TP4, TP5, TInstance, TPlaceholderFactory, SimpleActivatorData>
-        where TInstance : class, IDisposable
+        where TInstance : class, IDisposer
         where TPlaceholderFactory : PlaceholderFactory<TP0, TP1, TP2, TP3, TP4, TP5, TInstance>
     {
         public ContainerBuilder Builder { get; }
@@ -523,7 +523,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -557,7 +557,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -566,7 +566,7 @@ namespace ZenAutofac.Builders.Factory
 
     public class SubScopePlaceholderFactoryBuilder<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TInstance, TPlaceholderFactory>
         : ISubScopeFactoryBuilder<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TInstance, TPlaceholderFactory, SimpleActivatorData>
-        where TInstance : class, IDisposable
+        where TInstance : class, IDisposer
         where TPlaceholderFactory : PlaceholderFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TInstance>
     {
         public ContainerBuilder Builder { get; }
@@ -602,7 +602,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -636,7 +636,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -645,7 +645,7 @@ namespace ZenAutofac.Builders.Factory
 
     public class SubScopePlaceholderFactoryBuilder<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TInstance, TPlaceholderFactory>
         : ISubScopeFactoryBuilder<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TInstance, TPlaceholderFactory, SimpleActivatorData>
-        where TInstance : class, IDisposable
+        where TInstance : class, IDisposer
         where TPlaceholderFactory : PlaceholderFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TInstance>
     {
         public ContainerBuilder Builder { get; }
@@ -681,7 +681,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -715,7 +715,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -724,7 +724,7 @@ namespace ZenAutofac.Builders.Factory
 
     public class SubScopePlaceholderFactoryBuilder<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TInstance, TPlaceholderFactory>
         : ISubScopeFactoryBuilder<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TInstance, TPlaceholderFactory, SimpleActivatorData>
-        where TInstance : class, IDisposable
+        where TInstance : class, IDisposer
         where TPlaceholderFactory : PlaceholderFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TInstance>
     {
         public ContainerBuilder Builder { get; }
@@ -760,7 +760,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -794,7 +794,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -803,7 +803,7 @@ namespace ZenAutofac.Builders.Factory
 
     public class SubScopePlaceholderFactoryBuilder<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TInstance, TPlaceholderFactory>
         : ISubScopeFactoryBuilder<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TInstance, TPlaceholderFactory, SimpleActivatorData>
-        where TInstance : class, IDisposable
+        where TInstance : class, IDisposer
         where TPlaceholderFactory : PlaceholderFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TInstance>
     {
         public ContainerBuilder Builder { get; }
@@ -839,7 +839,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -873,7 +873,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });

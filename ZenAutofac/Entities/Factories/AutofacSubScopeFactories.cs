@@ -12,7 +12,7 @@ namespace ZenAutofac.Entities.Factories
 
         internal class AutofacSubScopeFactory<TInstance>
             : IFactory<TInstance>
-            where TInstance : IDisposable
+            where TInstance : IDisposer
         {
             private readonly ILifetimeScope _scope;
             private readonly Action<ContainerBuilder> _subScopeLoader;
@@ -32,7 +32,7 @@ namespace ZenAutofac.Entities.Factories
 
         internal class AutofacSubScopeFactory<TP0, TInstance>
             : IFactory<TP0, TInstance>
-            where TInstance : IDisposable
+            where TInstance : IDisposer
         {
             private readonly ILifetimeScope _scope;
             private readonly Action<ContainerBuilder, TP0> _subScopeLoader;
@@ -54,7 +54,7 @@ namespace ZenAutofac.Entities.Factories
 
         internal class AutofacSubScopeFactory<TP0, TP1, TInstance>
             : IFactory<TP0, TP1, TInstance>
-            where TInstance : IDisposable
+            where TInstance : IDisposer
         {
             private readonly ILifetimeScope _scope;
             private readonly Action<ContainerBuilder, TP0, TP1> _subScopeLoader;
@@ -78,7 +78,7 @@ namespace ZenAutofac.Entities.Factories
 
         internal class AutofacSubScopeFactory<TP0, TP1, TP2, TInstance>
             : IFactory<TP0, TP1, TP2, TInstance>
-            where TInstance : IDisposable
+            where TInstance : IDisposer
         {
             private readonly ILifetimeScope _scope;
             private readonly Action<ContainerBuilder, TP0, TP1, TP2> _subScopeLoader;
@@ -104,7 +104,7 @@ namespace ZenAutofac.Entities.Factories
 
         internal class AutofacSubScopeFactory<TP0, TP1, TP2, TP3, TInstance>
             : IFactory<TP0, TP1, TP2, TP3, TInstance>
-            where TInstance : IDisposable
+            where TInstance : IDisposer
         {
             private readonly ILifetimeScope _scope;
             private readonly Action<ContainerBuilder, TP0, TP1, TP2, TP3> _subScopeLoader;
@@ -132,7 +132,7 @@ namespace ZenAutofac.Entities.Factories
 
         internal class AutofacSubScopeFactory<TP0, TP1, TP2, TP3, TP4, TInstance>
             : IFactory<TP0, TP1, TP2, TP3, TP4, TInstance>
-            where TInstance : IDisposable
+            where TInstance : IDisposer
         {
             private readonly ILifetimeScope _scope;
             private readonly Action<ContainerBuilder, TP0, TP1, TP2, TP3, TP4> _subScopeLoader;
@@ -162,7 +162,7 @@ namespace ZenAutofac.Entities.Factories
 
         internal class AutofacSubScopeFactory<TP0, TP1, TP2, TP3, TP4, TP5, TInstance>
             : IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TInstance>
-            where TInstance : IDisposable
+            where TInstance : IDisposer
         {
             private readonly ILifetimeScope _scope;
             private readonly Action<ContainerBuilder, TP0, TP1, TP2, TP3, TP4, TP5> _subScopeLoader;
@@ -194,7 +194,7 @@ namespace ZenAutofac.Entities.Factories
 
         internal class AutofacSubScopeFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TInstance>
             : IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TInstance>
-            where TInstance : IDisposable
+            where TInstance : IDisposer
         {
             private readonly ILifetimeScope _scope;
             private readonly Action<ContainerBuilder, TP0, TP1, TP2, TP3, TP4, TP5, TP6> _subScopeLoader;
@@ -228,7 +228,7 @@ namespace ZenAutofac.Entities.Factories
 
         internal class AutofacSubScopeFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TInstance>
             : IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TInstance>
-            where TInstance : IDisposable
+            where TInstance : IDisposer
         {
             private readonly ILifetimeScope _scope;
             private readonly Action<ContainerBuilder, TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7> _subScopeLoader;
@@ -264,7 +264,7 @@ namespace ZenAutofac.Entities.Factories
 
         internal class AutofacSubScopeFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TInstance>
             : IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TInstance>
-            where TInstance : IDisposable
+            where TInstance : IDisposer
         {
             private readonly ILifetimeScope _scope;
             private readonly Action<ContainerBuilder, TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8> _subScopeLoader;
@@ -302,7 +302,7 @@ namespace ZenAutofac.Entities.Factories
 
         internal class AutofacSubScopeFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TInstance>
             : IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TInstance>
-            where TInstance : IDisposable
+            where TInstance : IDisposer
         {
             private readonly ILifetimeScope _scope;
             private readonly Action<ContainerBuilder, TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9> _subScopeLoader;
@@ -343,7 +343,7 @@ namespace ZenAutofac.Entities.Factories
 
         internal class AutofacSubScopeModuleFactory<TInstance, TModule>
             : IFactory<TInstance>
-            where TInstance : IDisposable
+            where TInstance : IDisposer
             where TModule : class, IModule
         {
             private readonly ILifetimeScope _scope;
@@ -366,7 +366,7 @@ namespace ZenAutofac.Entities.Factories
 
         internal class AutofacSubScopeModuleFactory<TP0, TInstance, TModule>
             : IFactory<TP0, TInstance>
-            where TInstance : IDisposable
+            where TInstance : IDisposer
             where TModule : class, IModule
         {
             private readonly ILifetimeScope _scope;
@@ -391,7 +391,7 @@ namespace ZenAutofac.Entities.Factories
 
         internal class AutofacSubScopeModuleFactory<TP0, TP1, TInstance, TModule>
             : IFactory<TP0, TP1, TInstance>
-            where TInstance : IDisposable
+            where TInstance : IDisposer
             where TModule : class, IModule
         {
             private readonly ILifetimeScope _scope;
@@ -418,7 +418,7 @@ namespace ZenAutofac.Entities.Factories
 
         internal class AutofacSubScopeModuleFactory<TP0, TP1, TP2, TInstance, TModule>
             : IFactory<TP0, TP1, TP2, TInstance>
-            where TInstance : IDisposable
+            where TInstance : IDisposer
             where TModule : class, IModule
         {
             private readonly ILifetimeScope _scope;
@@ -447,7 +447,7 @@ namespace ZenAutofac.Entities.Factories
 
         internal class AutofacSubScopeModuleFactory<TP0, TP1, TP2, TP3, TInstance, TModule>
             : IFactory<TP0, TP1, TP2, TP3, TInstance>
-            where TInstance : IDisposable
+            where TInstance : IDisposer
             where TModule : class, IModule
         {
             private readonly ILifetimeScope _scope;
@@ -478,7 +478,7 @@ namespace ZenAutofac.Entities.Factories
 
         internal class AutofacSubScopeModuleFactory<TP0, TP1, TP2, TP3, TP4, TInstance, TModule>
             : IFactory<TP0, TP1, TP2, TP3, TP4, TInstance>
-            where TInstance : IDisposable
+            where TInstance : IDisposer
             where TModule : class, IModule
         {
             private readonly ILifetimeScope _scope;
@@ -511,7 +511,7 @@ namespace ZenAutofac.Entities.Factories
 
         internal class AutofacSubScopeModuleFactory<TP0, TP1, TP2, TP3, TP4, TP5, TInstance, TModule>
             : IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TInstance>
-            where TInstance : IDisposable
+            where TInstance : IDisposer
             where TModule : class, IModule
         {
             private readonly ILifetimeScope _scope;
@@ -546,7 +546,7 @@ namespace ZenAutofac.Entities.Factories
 
         internal class AutofacSubScopeModuleFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TInstance, TModule>
             : IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TInstance>
-            where TInstance : IDisposable
+            where TInstance : IDisposer
             where TModule : class, IModule
         {
             private readonly ILifetimeScope _scope;
@@ -583,7 +583,7 @@ namespace ZenAutofac.Entities.Factories
 
         internal class AutofacSubScopeModuleFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TInstance, TModule>
             : IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TInstance>
-            where TInstance : IDisposable
+            where TInstance : IDisposer
             where TModule : class, IModule
         {
             private readonly ILifetimeScope _scope;
@@ -622,7 +622,7 @@ namespace ZenAutofac.Entities.Factories
 
         internal class AutofacSubScopeModuleFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TInstance, TModule>
             : IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TInstance>
-            where TInstance : IDisposable
+            where TInstance : IDisposer
             where TModule : class, IModule
         {
             private readonly ILifetimeScope _scope;
@@ -663,7 +663,7 @@ namespace ZenAutofac.Entities.Factories
 
         internal class AutofacSubScopeModuleFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TInstance, TModule>
             : IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TInstance>
-            where TInstance : IDisposable
+            where TInstance : IDisposer
             where TModule : class, IModule
         {
             private readonly ILifetimeScope _scope;
