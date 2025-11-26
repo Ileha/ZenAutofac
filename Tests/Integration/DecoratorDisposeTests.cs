@@ -253,7 +253,7 @@ public class DecoratorDisposeTests
             _sample = sample ?? throw new ArgumentNullException(nameof(sample));
         }
 
-        public virtual void Dispose()
+        public void Dispose()
         {
             Console.WriteLine("dispose");
             _disposeReceiver.ReceiveDispose();

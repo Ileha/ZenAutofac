@@ -12,7 +12,7 @@ namespace ZenAutofac.Entities
         private readonly SemaphoreSlim _syncRoot = new SemaphoreSlim(1, 1);
 
         /// <summary>Contents all implement IDisposable or IAsyncDisposable.</summary>
-        private Stack<object> _items = new Stack<object>();
+        private Queue<object> _items = new Queue<object>();
 
         /// <summary>
         /// Adds an object to the disposer, where that object only implements IAsyncDisposable. When the disposer is
@@ -51,7 +51,7 @@ namespace ZenAutofac.Entities
                 {
                     while (_items.Count > 0)
                     {
-                        var obj = _items.Pop();
+                        var obj = _items.Dequeue();
 
                         if (obj is IDisposable disposable)
                             disposable.Dispose();
@@ -87,7 +87,7 @@ namespace ZenAutofac.Entities
             {
                 while (_items.Count > 0)
                 {
-                    var obj = _items.Pop();
+                    var obj = _items.Dequeue();
                     if (obj is IAsyncDisposable asyncDisposable)
                         await asyncDisposable.DisposeAsync().ConfigureAwait(false);
                     else if (obj is IDisposable disposable)
@@ -114,7 +114,7 @@ namespace ZenAutofac.Entities
             _syncRoot.Wait();
             try
             {
-                _items.Push(instance);
+                _items.Enqueue(instance);
             }
             finally
             {
