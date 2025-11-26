@@ -1,6 +1,6 @@
 ﻿using System;
 using Autofac;
-using ZenAutofac.API.Builders.Decorator;
+using ZenAutofac.Interfaces.Builders.Decorator;
 
 namespace ZenAutofac.Builders.Decorator
 {

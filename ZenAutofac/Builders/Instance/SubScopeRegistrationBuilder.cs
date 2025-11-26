@@ -2,7 +2,7 @@
 using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
-using ZenAutofac.API.Builders.Instance;
+using ZenAutofac.Interfaces.Builders.Instance;
 
 namespace ZenAutofac.Builders.Instance
 {

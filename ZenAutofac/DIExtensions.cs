@@ -6,10 +6,10 @@ using Autofac.Core;
 using Autofac.Core.Registration;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
-using ZenAutofac.API.Builders.Decorator;
-using ZenAutofac.API.Builders.Instance;
 using ZenAutofac.Builders.Decorator;
 using ZenAutofac.Builders.Instance;
+using ZenAutofac.Interfaces.Builders.Decorator;
+using ZenAutofac.Interfaces.Builders.Instance;
 using Module = Autofac.Module;
 
 namespace ZenAutofac

@@ -1,9 +1,8 @@
 ﻿using System;
 using Autofac;
 using Autofac.Builder;
-using ZenAutofac.API.Factory;
 
-namespace ZenAutofac.API.Builders.Factory
+namespace ZenAutofac.Interfaces.Builders.Factory
 {
     //generated amount 10
 
