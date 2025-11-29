@@ -44,4 +44,8 @@
         <None Remove="TestResults\**"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Entities\" />
+    </ItemGroup>
+
 </Project>
