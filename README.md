@@ -480,19 +480,7 @@ class MyCustomServiceFactory : PlaceholderFactory<string, IService>
 
 #### CompositeDisposable
 
-Use `CompositeDisposable` for services and decorators to manage multiple disposables and comply with `IDisposable` and `ICollection<IDisposable>`. `CompositeDisposable` will dispose all disposables, added to it, when disposed.
-
-Example:
-
-```csharp
-var composite = new CompositeDisposable();
-
-_disposable1.AddTo(composite);
-_disposable2.AddTo(composite);
-
-//_disposable1 & _disposable2 will be disposed here
-composite.Dispose();
-```
+`CompositeDisposable` is removed from the project, please use `Disposer` instead, see [this](#disposer-related)
 
 #### IComponentContext.CreateInstance
 
