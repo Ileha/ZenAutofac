@@ -1,7 +1,4 @@
-using System;
-using System.Threading.Tasks;
 using NSubstitute;
-using NUnit.Framework;
 using ZenAutofac.Entities;
 
 namespace Tests.Entities;
@@ -14,7 +11,7 @@ public class DisposerTests
     {
         var disposer = new Disposer();
 
-        Assert.Throws<ArgumentNullException>(() => disposer.AddInstanceForDisposal((IDisposable)null!));
+        Assert.Throws<ArgumentNullException>(() => disposer.AddInstanceForDisposal(null!));
     }
 
     [Test]
@@ -22,7 +19,7 @@ public class DisposerTests
     {
         var disposer = new Disposer();
 
-        Assert.Throws<ArgumentNullException>(() => disposer.AddInstanceForAsyncDisposal((IAsyncDisposable)null!));
+        Assert.Throws<ArgumentNullException>(() => disposer.AddInstanceForAsyncDisposal(null!));
     }
 
     [Test]
@@ -40,7 +37,8 @@ public class DisposerTests
         var disposer = new Disposer();
         disposer.Dispose();
 
-        Assert.Throws<ObjectDisposedException>(() => disposer.AddInstanceForAsyncDisposal(Substitute.For<IAsyncDisposable>()));
+        Assert.Throws<ObjectDisposedException>(() =>
+            disposer.AddInstanceForAsyncDisposal(Substitute.For<IAsyncDisposable>()));
     }
 
     [Test]
