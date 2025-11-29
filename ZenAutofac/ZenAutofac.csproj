@@ -14,14 +14,21 @@
 your Autofac applications. This library provides a familiar API for developers who love Zenject's approach to scoping
 and subcontainers but want to leverage Autofac's robust dependency injection capabilities.
 
-            ## 🚀 Key Features
+Key Features
 
-            - **Zenject-inspired subcontainer syntax** for Autofac
+- Zenject-inspired subcontainer syntax for Autofac
 - Subcontainer lifetime management
             - Seamless integration of Zenject's scoping patterns
             - Simplified decorator registration with isolated scopes
             - Full compatibility with existing Autofac applications
-- `IFactory&lt;...&gt;` and `PlaceholderFactory&lt;...&gt;` for factory registration with subcontainer support</Description>
+- `IFactory&lt;...&gt;` and `PlaceholderFactory&lt;...&gt;` for factory registration with subcontainer support
+
+Why Use ZenAutofac?
+
+This library is ideal for:
+
+- Applications requiring advanced dependency injection scenarios with clean scoping
+- Developers who prefer to split business logic and infrastructure</Description>
         <PackageReleaseNotes>version 1.0.0
 initial implementation
 ---
@@ -34,7 +41,7 @@ version 2.0.1
 bugfix wrong order of IDisposables execution when harmony patched
 ---
 version 2.0.2
-split to implemetation and API</PackageReleaseNotes>
+Move to IDisposer interface</PackageReleaseNotes>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <TargetFrameworks>net6.0;net8.0;netstandard2.0;netstandard2.1</TargetFrameworks>
@@ -108,11 +115,22 @@ split to implemetation and API</PackageReleaseNotes>
     <ItemGroup>
         <PackageReference Include="Autofac" Version="8.4.0" />
         <PackageReference Include="JetBrains.Annotations" Version="2025.2.1" />
-        <PackageReference Include="Lib.Harmony" Version="2.4.1" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.8" />
     </ItemGroup>
 
     <ItemGroup>
+        <None Update="Interfaces\IFactory.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>IFactory.cs</LastGenOutput>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="Interfaces\IFactory.cs">
+            <DependentUpon>IFactory.tt</DependentUpon>
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+        </Compile>
         <Compile Update="Entities\Factories\AutofacFunctionFactories.cs">
           <AutoGen>True</AutoGen>
           <DesignTime>True</DesignTime>
@@ -177,10 +195,6 @@ split to implemetation and API</PackageReleaseNotes>
 
     <ItemGroup>
       <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\ZenAutofac.API\ZenAutofac.API.csproj" />
     </ItemGroup>
 
 </Project>

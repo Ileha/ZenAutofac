@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Autofac.Core;
 using NSubstitute;
 using ZenAutofac;
 
@@ -191,24 +192,42 @@ public class DIExtensionDecoratorTests
         }
     }
 
-    public class ServiceDecoratorDisposable : ServiceDecorator, IDisposable
+    public class ServiceDecoratorDisposable : ServiceDecorator, IDisposer
     {
         private readonly string _dependency;
+        private readonly IDisposer _disposerImplementation;
 
         public ServiceDecoratorDisposable(
             string dependency,
             IService baseService) : base(baseService)
         {
             _dependency = dependency;
-        }
-
-        public void Dispose()
-        {
+            _disposerImplementation = new ZenAutofac.Entities.Disposer();
         }
 
         public override string GetData()
         {
             return $"{BaseService.GetData()}.{_dependency}";
+        }
+
+        public ValueTask DisposeAsync()
+        {
+            return _disposerImplementation.DisposeAsync();
+        }
+
+        public void AddInstanceForDisposal(IDisposable instance)
+        {
+            _disposerImplementation.AddInstanceForDisposal(instance);
+        }
+
+        public void AddInstanceForAsyncDisposal(IAsyncDisposable instance)
+        {
+            _disposerImplementation.AddInstanceForAsyncDisposal(instance);
+        }
+
+        public void Dispose()
+        {
+            _disposerImplementation.Dispose();
         }
     }
 }

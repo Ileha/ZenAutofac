@@ -6,13 +6,13 @@ using System;
 using Autofac;
 using Autofac.Builder;
 using ZenAutofac.Entities.Factories;
-using ZenAutofac.Extensions.HarmonyPatcher;
-using ZenAutofac.API.Builders.Factory;
-using ZenAutofac.API.Factory;
+using ZenAutofac.Extensions;
+using ZenAutofac.Interfaces;
+using ZenAutofac.Interfaces.Builders.Factory;
 
 namespace ZenAutofac.Builders.Factory
 {
-    //generated amount <#@ include file="../../../ZenAutofac.API/Constants.ttinclude" #><#= Constants.GenericParametersCount #>
+    //generated amount <#@ include file="../../Constants.ttinclude" #><#= Constants.GenericParametersCount #>
 
 <#
     for (var i = 0; i <= Constants.GenericParametersCount; i++)
@@ -54,7 +54,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });
@@ -84,7 +84,7 @@ namespace ZenAutofac.Builders.Factory
                     placeholderFactory.Nested = factory;
 
                     subScope
-                        .AddToHarmony(placeholderFactory);
+                        .AddTo(placeholderFactory);
 
                     return placeholderFactory;
                 });

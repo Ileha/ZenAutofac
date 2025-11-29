@@ -1,11 +1,10 @@
-﻿using System;
-using ZenAutofac.API.Factory;
+﻿using ZenAutofac.Interfaces;
 
 namespace ZenAutofac.Entities.Factories
 {
     //generated amount 10
 
-    public abstract class PlaceholderFactory<TInstance> : IFactory<TInstance>, IDisposable
+    public abstract class PlaceholderFactory<TInstance> : Disposer, IFactory<TInstance>
     {
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         internal IFactory<TInstance> Nested { get; set; }
@@ -15,13 +14,9 @@ namespace ZenAutofac.Entities.Factories
         {
             return Nested.Create();
         }
-
-        public virtual void Dispose()
-        {
-        }
     }
 
-    public abstract class PlaceholderFactory<TP0, TInstance> : IFactory<TP0, TInstance>, IDisposable
+    public abstract class PlaceholderFactory<TP0, TInstance> : Disposer, IFactory<TP0, TInstance>
     {
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         internal IFactory<TP0, TInstance> Nested { get; set; }
@@ -31,13 +26,9 @@ namespace ZenAutofac.Entities.Factories
         {
             return Nested.Create(param0);
         }
-
-        public virtual void Dispose()
-        {
-        }
     }
 
-    public abstract class PlaceholderFactory<TP0, TP1, TInstance> : IFactory<TP0, TP1, TInstance>, IDisposable
+    public abstract class PlaceholderFactory<TP0, TP1, TInstance> : Disposer, IFactory<TP0, TP1, TInstance>
     {
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         internal IFactory<TP0, TP1, TInstance> Nested { get; set; }
@@ -47,13 +38,9 @@ namespace ZenAutofac.Entities.Factories
         {
             return Nested.Create(param0, param1);
         }
-
-        public virtual void Dispose()
-        {
-        }
     }
 
-    public abstract class PlaceholderFactory<TP0, TP1, TP2, TInstance> : IFactory<TP0, TP1, TP2, TInstance>, IDisposable
+    public abstract class PlaceholderFactory<TP0, TP1, TP2, TInstance> : Disposer, IFactory<TP0, TP1, TP2, TInstance>
     {
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         internal IFactory<TP0, TP1, TP2, TInstance> Nested { get; set; }
@@ -63,13 +50,9 @@ namespace ZenAutofac.Entities.Factories
         {
             return Nested.Create(param0, param1, param2);
         }
-
-        public virtual void Dispose()
-        {
-        }
     }
 
-    public abstract class PlaceholderFactory<TP0, TP1, TP2, TP3, TInstance> : IFactory<TP0, TP1, TP2, TP3, TInstance>, IDisposable
+    public abstract class PlaceholderFactory<TP0, TP1, TP2, TP3, TInstance> : Disposer, IFactory<TP0, TP1, TP2, TP3, TInstance>
     {
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         internal IFactory<TP0, TP1, TP2, TP3, TInstance> Nested { get; set; }
@@ -79,13 +62,9 @@ namespace ZenAutofac.Entities.Factories
         {
             return Nested.Create(param0, param1, param2, param3);
         }
-
-        public virtual void Dispose()
-        {
-        }
     }
 
-    public abstract class PlaceholderFactory<TP0, TP1, TP2, TP3, TP4, TInstance> : IFactory<TP0, TP1, TP2, TP3, TP4, TInstance>, IDisposable
+    public abstract class PlaceholderFactory<TP0, TP1, TP2, TP3, TP4, TInstance> : Disposer, IFactory<TP0, TP1, TP2, TP3, TP4, TInstance>
     {
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         internal IFactory<TP0, TP1, TP2, TP3, TP4, TInstance> Nested { get; set; }
@@ -95,13 +74,9 @@ namespace ZenAutofac.Entities.Factories
         {
             return Nested.Create(param0, param1, param2, param3, param4);
         }
-
-        public virtual void Dispose()
-        {
-        }
     }
 
-    public abstract class PlaceholderFactory<TP0, TP1, TP2, TP3, TP4, TP5, TInstance> : IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TInstance>, IDisposable
+    public abstract class PlaceholderFactory<TP0, TP1, TP2, TP3, TP4, TP5, TInstance> : Disposer, IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TInstance>
     {
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         internal IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TInstance> Nested { get; set; }
@@ -111,13 +86,9 @@ namespace ZenAutofac.Entities.Factories
         {
             return Nested.Create(param0, param1, param2, param3, param4, param5);
         }
-
-        public virtual void Dispose()
-        {
-        }
     }
 
-    public abstract class PlaceholderFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TInstance> : IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TInstance>, IDisposable
+    public abstract class PlaceholderFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TInstance> : Disposer, IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TInstance>
     {
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         internal IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TInstance> Nested { get; set; }
@@ -127,13 +98,9 @@ namespace ZenAutofac.Entities.Factories
         {
             return Nested.Create(param0, param1, param2, param3, param4, param5, param6);
         }
-
-        public virtual void Dispose()
-        {
-        }
     }
 
-    public abstract class PlaceholderFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TInstance> : IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TInstance>, IDisposable
+    public abstract class PlaceholderFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TInstance> : Disposer, IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TInstance>
     {
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         internal IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TInstance> Nested { get; set; }
@@ -143,13 +110,9 @@ namespace ZenAutofac.Entities.Factories
         {
             return Nested.Create(param0, param1, param2, param3, param4, param5, param6, param7);
         }
-
-        public virtual void Dispose()
-        {
-        }
     }
 
-    public abstract class PlaceholderFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TInstance> : IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TInstance>, IDisposable
+    public abstract class PlaceholderFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TInstance> : Disposer, IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TInstance>
     {
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         internal IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TInstance> Nested { get; set; }
@@ -159,13 +122,9 @@ namespace ZenAutofac.Entities.Factories
         {
             return Nested.Create(param0, param1, param2, param3, param4, param5, param6, param7, param8);
         }
-
-        public virtual void Dispose()
-        {
-        }
     }
 
-    public abstract class PlaceholderFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TInstance> : IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TInstance>, IDisposable
+    public abstract class PlaceholderFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TInstance> : Disposer, IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TInstance>
     {
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         internal IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TInstance> Nested { get; set; }
@@ -174,10 +133,6 @@ namespace ZenAutofac.Entities.Factories
         public virtual TInstance Create(TP0 param0, TP1 param1, TP2 param2, TP3 param3, TP4 param4, TP5 param5, TP6 param6, TP7 param7, TP8 param8, TP9 param9)
         {
             return Nested.Create(param0, param1, param2, param3, param4, param5, param6, param7, param8, param9);
-        }
-
-        public virtual void Dispose()
-        {
         }
     }
 

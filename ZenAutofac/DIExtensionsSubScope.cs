@@ -2,7 +2,7 @@
 using Autofac;
 using Autofac.Core;
 using JetBrains.Annotations;
-using ZenAutofac.Extensions.HarmonyPatcher;
+using ZenAutofac.Extensions;
 
 namespace ZenAutofac
 {
@@ -13,7 +13,7 @@ namespace ZenAutofac
         public static TComponent ResolveFromSubScope<TComponent>(
             this ILifetimeScope scope,
             Action<ContainerBuilder> subScopeLoader)
-            where TComponent : IDisposable
+            where TComponent : IDisposer
         {
             var guid = Guid.NewGuid();
 
@@ -29,7 +29,7 @@ namespace ZenAutofac
             var service = subScope.Resolve<TComponent>();
 
             subScope
-                .AddToHarmony(service);
+                .AddTo(service);
 
             return service;
         }
@@ -38,7 +38,7 @@ namespace ZenAutofac
             this ILifetimeScope scope,
             Action<ContainerBuilder, TP0> subScopeLoader,
 			TP0 param0)
-            where TComponent : IDisposable
+            where TComponent : IDisposer
         {
             var guid = Guid.NewGuid();
 
@@ -55,7 +55,7 @@ namespace ZenAutofac
             var service = subScope.Resolve<TComponent>();
 
             subScope
-                .AddToHarmony(service);
+                .AddTo(service);
 
             return service;
         }
@@ -65,7 +65,7 @@ namespace ZenAutofac
             Action<ContainerBuilder, TP0, TP1> subScopeLoader,
 			TP0 param0,
 			TP1 param1)
-            where TComponent : IDisposable
+            where TComponent : IDisposer
         {
             var guid = Guid.NewGuid();
 
@@ -83,7 +83,7 @@ namespace ZenAutofac
             var service = subScope.Resolve<TComponent>();
 
             subScope
-                .AddToHarmony(service);
+                .AddTo(service);
 
             return service;
         }
@@ -94,7 +94,7 @@ namespace ZenAutofac
 			TP0 param0,
 			TP1 param1,
 			TP2 param2)
-            where TComponent : IDisposable
+            where TComponent : IDisposer
         {
             var guid = Guid.NewGuid();
 
@@ -113,7 +113,7 @@ namespace ZenAutofac
             var service = subScope.Resolve<TComponent>();
 
             subScope
-                .AddToHarmony(service);
+                .AddTo(service);
 
             return service;
         }
@@ -125,7 +125,7 @@ namespace ZenAutofac
 			TP1 param1,
 			TP2 param2,
 			TP3 param3)
-            where TComponent : IDisposable
+            where TComponent : IDisposer
         {
             var guid = Guid.NewGuid();
 
@@ -145,7 +145,7 @@ namespace ZenAutofac
             var service = subScope.Resolve<TComponent>();
 
             subScope
-                .AddToHarmony(service);
+                .AddTo(service);
 
             return service;
         }
@@ -158,7 +158,7 @@ namespace ZenAutofac
 			TP2 param2,
 			TP3 param3,
 			TP4 param4)
-            where TComponent : IDisposable
+            where TComponent : IDisposer
         {
             var guid = Guid.NewGuid();
 
@@ -179,7 +179,7 @@ namespace ZenAutofac
             var service = subScope.Resolve<TComponent>();
 
             subScope
-                .AddToHarmony(service);
+                .AddTo(service);
 
             return service;
         }
@@ -193,7 +193,7 @@ namespace ZenAutofac
 			TP3 param3,
 			TP4 param4,
 			TP5 param5)
-            where TComponent : IDisposable
+            where TComponent : IDisposer
         {
             var guid = Guid.NewGuid();
 
@@ -215,7 +215,7 @@ namespace ZenAutofac
             var service = subScope.Resolve<TComponent>();
 
             subScope
-                .AddToHarmony(service);
+                .AddTo(service);
 
             return service;
         }
@@ -230,7 +230,7 @@ namespace ZenAutofac
 			TP4 param4,
 			TP5 param5,
 			TP6 param6)
-            where TComponent : IDisposable
+            where TComponent : IDisposer
         {
             var guid = Guid.NewGuid();
 
@@ -253,7 +253,7 @@ namespace ZenAutofac
             var service = subScope.Resolve<TComponent>();
 
             subScope
-                .AddToHarmony(service);
+                .AddTo(service);
 
             return service;
         }
@@ -269,7 +269,7 @@ namespace ZenAutofac
 			TP5 param5,
 			TP6 param6,
 			TP7 param7)
-            where TComponent : IDisposable
+            where TComponent : IDisposer
         {
             var guid = Guid.NewGuid();
 
@@ -293,7 +293,7 @@ namespace ZenAutofac
             var service = subScope.Resolve<TComponent>();
 
             subScope
-                .AddToHarmony(service);
+                .AddTo(service);
 
             return service;
         }
@@ -310,7 +310,7 @@ namespace ZenAutofac
 			TP6 param6,
 			TP7 param7,
 			TP8 param8)
-            where TComponent : IDisposable
+            where TComponent : IDisposer
         {
             var guid = Guid.NewGuid();
 
@@ -335,7 +335,7 @@ namespace ZenAutofac
             var service = subScope.Resolve<TComponent>();
 
             subScope
-                .AddToHarmony(service);
+                .AddTo(service);
 
             return service;
         }
@@ -353,7 +353,7 @@ namespace ZenAutofac
 			TP7 param7,
 			TP8 param8,
 			TP9 param9)
-            where TComponent : IDisposable
+            where TComponent : IDisposer
         {
             var guid = Guid.NewGuid();
 
@@ -379,7 +379,7 @@ namespace ZenAutofac
             var service = subScope.Resolve<TComponent>();
 
             subScope
-                .AddToHarmony(service);
+                .AddTo(service);
 
             return service;
         }
@@ -388,7 +388,7 @@ namespace ZenAutofac
         public static TComponent ResolveFromSubScope<TComponent, TModule>(
             this ILifetimeScope scope,
             [CanBeNull] Func<ILifetimeScope, TModule> moduleFactory = null)
-            where TComponent : IDisposable
+            where TComponent : IDisposer
             where TModule : class, IModule
         {
             var guid = Guid.NewGuid();
@@ -408,7 +408,7 @@ namespace ZenAutofac
             var service = subScope.Resolve<TComponent>();
 
             subScope
-                .AddToHarmony(service);
+                .AddTo(service);
 
             return service;
         }
@@ -416,7 +416,7 @@ namespace ZenAutofac
             this ILifetimeScope scope,
 			TP0 param0,
             [CanBeNull] Func<ILifetimeScope, TP0, TModule> moduleFactory = null)
-            where TComponent : IDisposable
+            where TComponent : IDisposer
             where TModule : class, IModule
         {
             var guid = Guid.NewGuid();
@@ -436,7 +436,7 @@ namespace ZenAutofac
             var service = subScope.Resolve<TComponent>();
 
             subScope
-                .AddToHarmony(service);
+                .AddTo(service);
 
             return service;
         }
@@ -445,7 +445,7 @@ namespace ZenAutofac
 			TP0 param0,
 			TP1 param1,
             [CanBeNull] Func<ILifetimeScope, TP0, TP1, TModule> moduleFactory = null)
-            where TComponent : IDisposable
+            where TComponent : IDisposer
             where TModule : class, IModule
         {
             var guid = Guid.NewGuid();
@@ -466,7 +466,7 @@ namespace ZenAutofac
             var service = subScope.Resolve<TComponent>();
 
             subScope
-                .AddToHarmony(service);
+                .AddTo(service);
 
             return service;
         }
@@ -476,7 +476,7 @@ namespace ZenAutofac
 			TP1 param1,
 			TP2 param2,
             [CanBeNull] Func<ILifetimeScope, TP0, TP1, TP2, TModule> moduleFactory = null)
-            where TComponent : IDisposable
+            where TComponent : IDisposer
             where TModule : class, IModule
         {
             var guid = Guid.NewGuid();
@@ -498,7 +498,7 @@ namespace ZenAutofac
             var service = subScope.Resolve<TComponent>();
 
             subScope
-                .AddToHarmony(service);
+                .AddTo(service);
 
             return service;
         }
@@ -509,7 +509,7 @@ namespace ZenAutofac
 			TP2 param2,
 			TP3 param3,
             [CanBeNull] Func<ILifetimeScope, TP0, TP1, TP2, TP3, TModule> moduleFactory = null)
-            where TComponent : IDisposable
+            where TComponent : IDisposer
             where TModule : class, IModule
         {
             var guid = Guid.NewGuid();
@@ -532,7 +532,7 @@ namespace ZenAutofac
             var service = subScope.Resolve<TComponent>();
 
             subScope
-                .AddToHarmony(service);
+                .AddTo(service);
 
             return service;
         }
@@ -544,7 +544,7 @@ namespace ZenAutofac
 			TP3 param3,
 			TP4 param4,
             [CanBeNull] Func<ILifetimeScope, TP0, TP1, TP2, TP3, TP4, TModule> moduleFactory = null)
-            where TComponent : IDisposable
+            where TComponent : IDisposer
             where TModule : class, IModule
         {
             var guid = Guid.NewGuid();
@@ -568,7 +568,7 @@ namespace ZenAutofac
             var service = subScope.Resolve<TComponent>();
 
             subScope
-                .AddToHarmony(service);
+                .AddTo(service);
 
             return service;
         }
@@ -581,7 +581,7 @@ namespace ZenAutofac
 			TP4 param4,
 			TP5 param5,
             [CanBeNull] Func<ILifetimeScope, TP0, TP1, TP2, TP3, TP4, TP5, TModule> moduleFactory = null)
-            where TComponent : IDisposable
+            where TComponent : IDisposer
             where TModule : class, IModule
         {
             var guid = Guid.NewGuid();
@@ -606,7 +606,7 @@ namespace ZenAutofac
             var service = subScope.Resolve<TComponent>();
 
             subScope
-                .AddToHarmony(service);
+                .AddTo(service);
 
             return service;
         }
@@ -620,7 +620,7 @@ namespace ZenAutofac
 			TP5 param5,
 			TP6 param6,
             [CanBeNull] Func<ILifetimeScope, TP0, TP1, TP2, TP3, TP4, TP5, TP6, TModule> moduleFactory = null)
-            where TComponent : IDisposable
+            where TComponent : IDisposer
             where TModule : class, IModule
         {
             var guid = Guid.NewGuid();
@@ -646,7 +646,7 @@ namespace ZenAutofac
             var service = subScope.Resolve<TComponent>();
 
             subScope
-                .AddToHarmony(service);
+                .AddTo(service);
 
             return service;
         }
@@ -661,7 +661,7 @@ namespace ZenAutofac
 			TP6 param6,
 			TP7 param7,
             [CanBeNull] Func<ILifetimeScope, TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TModule> moduleFactory = null)
-            where TComponent : IDisposable
+            where TComponent : IDisposer
             where TModule : class, IModule
         {
             var guid = Guid.NewGuid();
@@ -688,7 +688,7 @@ namespace ZenAutofac
             var service = subScope.Resolve<TComponent>();
 
             subScope
-                .AddToHarmony(service);
+                .AddTo(service);
 
             return service;
         }
@@ -704,7 +704,7 @@ namespace ZenAutofac
 			TP7 param7,
 			TP8 param8,
             [CanBeNull] Func<ILifetimeScope, TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TModule> moduleFactory = null)
-            where TComponent : IDisposable
+            where TComponent : IDisposer
             where TModule : class, IModule
         {
             var guid = Guid.NewGuid();
@@ -732,7 +732,7 @@ namespace ZenAutofac
             var service = subScope.Resolve<TComponent>();
 
             subScope
-                .AddToHarmony(service);
+                .AddTo(service);
 
             return service;
         }
@@ -749,7 +749,7 @@ namespace ZenAutofac
 			TP8 param8,
 			TP9 param9,
             [CanBeNull] Func<ILifetimeScope, TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TModule> moduleFactory = null)
-            where TComponent : IDisposable
+            where TComponent : IDisposer
             where TModule : class, IModule
         {
             var guid = Guid.NewGuid();
@@ -778,7 +778,7 @@ namespace ZenAutofac
             var service = subScope.Resolve<TComponent>();
 
             subScope
-                .AddToHarmony(service);
+                .AddTo(service);
 
             return service;
         }

@@ -2,13 +2,13 @@
 using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
-using ZenAutofac.API.Builders.Instance;
+using ZenAutofac.Interfaces.Builders.Instance;
 
 namespace ZenAutofac.Builders.Instance
 {
     public class SubScopeRegistrationBuilder<TComponent>
         : ISubScopeRegistrationBuilder<TComponent>
-        where TComponent : class, IDisposable
+        where TComponent : class, IDisposer
     {
         public ContainerBuilder Builder { get; }
 

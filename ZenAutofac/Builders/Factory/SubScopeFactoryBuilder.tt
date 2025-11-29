@@ -6,12 +6,12 @@ using System;
 using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
-using ZenAutofac.API.Builders.Factory;
-using ZenAutofac.API.Factory;
+using ZenAutofac.Interfaces;
+using ZenAutofac.Interfaces.Builders.Factory;
 
 namespace ZenAutofac.Builders.Factory
 {
-    //generated amount <#@ include file="../../../ZenAutofac.API/Constants.ttinclude" #><#= Constants.GenericParametersCount #>
+    //generated amount <#@ include file="../../Constants.ttinclude" #><#= Constants.GenericParametersCount #>
 
 <#
     for (var i = 0; i <= Constants.GenericParametersCount; i++)
@@ -22,7 +22,7 @@ namespace ZenAutofac.Builders.Factory
             <#=string.Join(", ", Enumerable.Repeat(0, i).Select((_, j) => $"TP{j}")) #><#= i == 0 ? "" : ",\n\t\t\t" #>TInstance,
             IFactory<<#=string.Join(", ", Enumerable.Repeat(0, i).Select((_, j) => $"TP{j}")) #><#= i == 0 ? "" : ", " #>TInstance>,
             ConcreteReflectionActivatorData>
-        where TInstance : class, IDisposable
+        where TInstance : class, IDisposer
     {
         public ContainerBuilder Builder { get; }
 

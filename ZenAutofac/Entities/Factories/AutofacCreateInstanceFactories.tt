@@ -4,13 +4,13 @@
 <#@ import namespace="System.Linq" #>
 using System;
 using Autofac;
-using ZenAutofac.API.Factory;
+using ZenAutofac.Interfaces;
 
 namespace ZenAutofac.Entities.Factories
 {
     public static partial class DIExtensions
     {
-        //generated amount <#@ include file="../../../ZenAutofac.API/Constants.ttinclude" #><#= Constants.GenericParametersCount #>
+        //generated amount <#@ include file="../../Constants.ttinclude" #><#= Constants.GenericParametersCount #>
 
 <#
     for (var i = 0; i <= Constants.GenericParametersCount; i++)

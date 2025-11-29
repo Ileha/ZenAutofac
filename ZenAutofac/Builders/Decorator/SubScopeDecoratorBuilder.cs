@@ -2,12 +2,12 @@
 using Autofac;
 using Autofac.Core;
 using JetBrains.Annotations;
-using ZenAutofac.API.Builders.Decorator;
+using ZenAutofac.Interfaces.Builders.Decorator;
 
 namespace ZenAutofac.Builders.Decorator
 {
     public class SubScopeDecoratorBuilder<TDecorator, TService> : ISubScopeDecoratorBuilder<TDecorator, TService>
-        where TDecorator : TService, IDisposable
+        where TDecorator : TService, IDisposer
         where TService : class
     {
         public ContainerBuilder Builder { get; }
@@ -59,7 +59,7 @@ namespace ZenAutofac.Builders.Decorator
             Action<ContainerBuilder, TService> subScopeLoader,
             IComponentContext context,
             TService nestedService)
-            where TComponent : IDisposable
+            where TComponent : IDisposer
         {
             var scope = context.Resolve<ILifetimeScope>();
             return scope.ResolveFromSubScope<TService, TComponent>(subScopeLoader, nestedService);
@@ -70,7 +70,7 @@ namespace ZenAutofac.Builders.Decorator
             TService nestedService,
             [CanBeNull] Func<ILifetimeScope, TService, TModule> moduleFactory = null)
             where TModule : class, IModule
-            where TComponent : IDisposable
+            where TComponent : IDisposer
         {
             var scope = context.Resolve<ILifetimeScope>();
             return scope.ResolveFromSubScope<TService, TComponent, TModule>(nestedService, moduleFactory);

@@ -2,8 +2,8 @@
 using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
-using ZenAutofac.API.Builders.Factory;
-using ZenAutofac.API.Factory;
+using ZenAutofac.Interfaces;
+using ZenAutofac.Interfaces.Builders.Factory;
 
 namespace ZenAutofac.Builders.Factory
 {
@@ -14,7 +14,7 @@ namespace ZenAutofac.Builders.Factory
             TInstance,
             IFactory<TInstance>,
             ConcreteReflectionActivatorData>
-        where TInstance : class, IDisposable
+        where TInstance : class, IDisposer
     {
         public ContainerBuilder Builder { get; }
 
@@ -53,7 +53,7 @@ namespace ZenAutofac.Builders.Factory
 			TInstance,
             IFactory<TP0, TInstance>,
             ConcreteReflectionActivatorData>
-        where TInstance : class, IDisposable
+        where TInstance : class, IDisposer
     {
         public ContainerBuilder Builder { get; }
 
@@ -92,7 +92,7 @@ namespace ZenAutofac.Builders.Factory
 			TInstance,
             IFactory<TP0, TP1, TInstance>,
             ConcreteReflectionActivatorData>
-        where TInstance : class, IDisposable
+        where TInstance : class, IDisposer
     {
         public ContainerBuilder Builder { get; }
 
@@ -131,7 +131,7 @@ namespace ZenAutofac.Builders.Factory
 			TInstance,
             IFactory<TP0, TP1, TP2, TInstance>,
             ConcreteReflectionActivatorData>
-        where TInstance : class, IDisposable
+        where TInstance : class, IDisposer
     {
         public ContainerBuilder Builder { get; }
 
@@ -170,7 +170,7 @@ namespace ZenAutofac.Builders.Factory
 			TInstance,
             IFactory<TP0, TP1, TP2, TP3, TInstance>,
             ConcreteReflectionActivatorData>
-        where TInstance : class, IDisposable
+        where TInstance : class, IDisposer
     {
         public ContainerBuilder Builder { get; }
 
@@ -209,7 +209,7 @@ namespace ZenAutofac.Builders.Factory
 			TInstance,
             IFactory<TP0, TP1, TP2, TP3, TP4, TInstance>,
             ConcreteReflectionActivatorData>
-        where TInstance : class, IDisposable
+        where TInstance : class, IDisposer
     {
         public ContainerBuilder Builder { get; }
 
@@ -248,7 +248,7 @@ namespace ZenAutofac.Builders.Factory
 			TInstance,
             IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TInstance>,
             ConcreteReflectionActivatorData>
-        where TInstance : class, IDisposable
+        where TInstance : class, IDisposer
     {
         public ContainerBuilder Builder { get; }
 
@@ -287,7 +287,7 @@ namespace ZenAutofac.Builders.Factory
 			TInstance,
             IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TInstance>,
             ConcreteReflectionActivatorData>
-        where TInstance : class, IDisposable
+        where TInstance : class, IDisposer
     {
         public ContainerBuilder Builder { get; }
 
@@ -326,7 +326,7 @@ namespace ZenAutofac.Builders.Factory
 			TInstance,
             IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TInstance>,
             ConcreteReflectionActivatorData>
-        where TInstance : class, IDisposable
+        where TInstance : class, IDisposer
     {
         public ContainerBuilder Builder { get; }
 
@@ -365,7 +365,7 @@ namespace ZenAutofac.Builders.Factory
 			TInstance,
             IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TInstance>,
             ConcreteReflectionActivatorData>
-        where TInstance : class, IDisposable
+        where TInstance : class, IDisposer
     {
         public ContainerBuilder Builder { get; }
 
@@ -404,7 +404,7 @@ namespace ZenAutofac.Builders.Factory
 			TInstance,
             IFactory<TP0, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TInstance>,
             ConcreteReflectionActivatorData>
-        where TInstance : class, IDisposable
+        where TInstance : class, IDisposer
     {
         public ContainerBuilder Builder { get; }
 

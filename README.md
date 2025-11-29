@@ -20,10 +20,8 @@ and subcontainers but want to leverage Autofac's robust dependency injection cap
 
 This library is ideal for:
 
-- Teams transitioning from Zenject to Autofac
-- Projects that want to combine the best of both DI containers
-- Developers who prefer Zenject's subcontainer API but need Autofac's features
 - Applications requiring advanced dependency injection scenarios with clean scoping
+- Developers who prefer to split business logic and infrastructure
 
 ## 📦 Installation
 
@@ -39,7 +37,7 @@ Or via the .NET CLI:
 dotnet add package ZenAutofac
 ```
 
-## 🛠️ Quick Start
+## Quick Start
 
 ```csharp
 // Create your container builder
@@ -75,14 +73,14 @@ container.Resolve<ISampleService>();
 
 ## 📚 Documentation
 
-> ℹ️ **Info**: All instances resolved from subcontainers have to implement `IDisposable` interface. This needed to limit subcontainers lifetime. When instance is disposed, it's subcontainer will be disposed too. Instance's `Dispose` method will be called patched via [Harmony](https://github.com/pardeike/Harmony) library, more information [here](#harmonypatch-related).
+> ℹ️ **Info**: All instances resolved from subcontainers have to implement `IDisposer` interface. This needed to limit subcontainers lifetime. When instance is disposed, it's subcontainer will be disposed too. This is acheaved via `IDisposer` interface. More information [here](#disposer-related)
 
 ### Creating Subcontainers
 
 Create isolated subcontainers for instance. Based on Autofac's lifetime scope. Scope will inherit all dependencies from
 parent scope(s). In the same time scope could have own dependencies, that will be available only in this scope.
-See [Quick Start](#-quick-start) for code sample.
-When `FromSubScope()` called it supposed to create new nested `ILifetimeScope` register required type and all it dependencies and resolve that type form created subcontainer. In other words target type have to be registered in subcontainer installer and implements `IDisposable`
+See [Quick Start](#quick-start) for code sample.
+When `FromSubScope()` called it supposed to create new nested `ILifetimeScope` register required type and all it dependencies and resolve that type form created subcontainer. In other words target type have to be registered in subcontainer installer and implements `IDisposer`
 
 ### Overall structure
 
@@ -482,19 +480,7 @@ class MyCustomServiceFactory : PlaceholderFactory<string, IService>
 
 #### CompositeDisposable
 
-Use `CompositeDisposable` for services and decorators to manage multiple disposables and comply with `IDisposable` and `ICollection<IDisposable>`. `CompositeDisposable` will dispose all disposables, added to it, when disposed.
-
-Example:
-
-```csharp
-var composite = new CompositeDisposable();
-
-_disposable1.AddTo(composite);
-_disposable2.AddTo(composite);
-
-//_disposable1 & _disposable2 will be disposed here
-composite.Dispose();
-```
+`CompositeDisposable` is removed from the project, please use `Disposer` instead, see [this](#disposer-related)
 
 #### IComponentContext.CreateInstance
 
@@ -515,10 +501,18 @@ builder
 ```
 
 #### HarmonyPatch Related
-As mentioned before each instance resolved from subcontainer have to implement `IDisposable` interface. And subcontainer will be disposed when instance is disposed. To achieve this behavior `HarmonyPatch` is used.  
-It can add a finalizer to the instance A and set a reference to the instance B. When instance B will be disposed A will be disposed too.  
-That behavior is accessible via `A.AddToHarmony(B)` method. In that case `B` will be patched if not patched yet.  
-To force patch, in order to improve performance, use `HarmonyPatch.EnsurePatched(typeof(B))` when program starts. Or use `HarmonyPatch.PatchNonLazy()` method to patch all types (in that case generic will not be patched).
+Harmony is no longer used in ZenAutofac due to unstable behavior when writing unit tests and incompatibility with environments like IL2CPP that do not support runtime patching.
+
+#### Disposer Related
+As mentioned earlier, every instance resolved from a subcontainer must implement the `IDisposer` interface.  
+The subcontainer will be disposed when that instance is disposed.
+
+`IDisposer` is required to attach a subcontainer to an instance using the `IDisposer.AddInstanceForDisposal` method.
+
+To implement `IDisposer`, you can use composition:  
+implement `IDisposer` on your entity and forward all `IDisposer` method calls to `ZenAutofac.Entities.Disposer`.
+
+Be aware that registered instances will be disposed in the same order in which they were added.
 
 ## 🤝 Contributing
 

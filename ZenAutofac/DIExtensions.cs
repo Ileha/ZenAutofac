@@ -6,10 +6,10 @@ using Autofac.Core;
 using Autofac.Core.Registration;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
-using ZenAutofac.API.Builders.Decorator;
-using ZenAutofac.API.Builders.Instance;
 using ZenAutofac.Builders.Decorator;
 using ZenAutofac.Builders.Instance;
+using ZenAutofac.Interfaces.Builders.Decorator;
+using ZenAutofac.Interfaces.Builders.Instance;
 using Module = Autofac.Module;
 
 namespace ZenAutofac
@@ -69,14 +69,14 @@ namespace ZenAutofac
 
         public static ISubScopeRegistrationBuilder<T> FromSubScope<T>(
             this IExtendedRegistrationBuilder<T> builder)
-            where T : class, IDisposable
+            where T : class, IDisposer
         {
             return new SubScopeRegistrationBuilder<T>(builder.Builder);
         }
 
         public static ISubScopeDecoratorBuilder<TDecorator, TService> FromSubScope<TDecorator, TService>(
             this IExtendedDecoratorBuilder<TDecorator, TService> builder)
-            where TDecorator : TService, IDisposable
+            where TDecorator : TService, IDisposer
             where TService : class
         {
             return new SubScopeDecoratorBuilder<TDecorator, TService>(builder.Builder);
