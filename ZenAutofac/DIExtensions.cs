@@ -16,6 +16,35 @@ namespace ZenAutofac
 {
     public static partial class DIExtensions
     {
+        /// <summary>
+        /// used only to register module in autofac style, don't pass any dependencies from DI,
+        /// Only one you provide in parameters
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="parameters"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static IModuleRegistrar RegisterModuleWithArgs<T>(
+            this ContainerBuilder builder,
+            params Parameter[] parameters
+        ) where T : Module
+        {
+            if (builder == null)
+                throw new ArgumentNullException(nameof(builder));
+
+            var moduleBuilder = new ContainerBuilder();
+
+            moduleBuilder
+                .RegisterType<T>()
+                .WithParameters(parameters);
+
+            var container = moduleBuilder.Build();
+
+            var module = container.Resolve<T>();
+
+            return builder.RegisterModule(module);
+        }
+
         public static IRegistrationBuilder<TLimit, TReflectionActivatorData, TStyle>
             WithParameters<TLimit, TReflectionActivatorData, TStyle>(
                 this IRegistrationBuilder<TLimit, TReflectionActivatorData, TStyle> registration,
