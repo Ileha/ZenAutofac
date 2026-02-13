@@ -2,466 +2,593 @@ using Autofac;
 using Autofac.Core;
 using NSubstitute;
 using ZenAutofac;
+using ZenAutofac.Entities;
+using ZenAutofac.Extensions;
+using ZenAutofac.Interfaces;
 
-namespace Tests
+namespace Tests;
+
+// Test module for testing RegisterModuleWithArgs
+public class TestModule : Module
 {
-    // Test module for testing RegisterModuleWithArgs
-    public class TestModule : Module
+    public TestModule(string stringValue, int intValue)
     {
-        public string StringValue { get; }
-        public int IntValue { get; }
-
-        public TestModule(string stringValue, int intValue)
-        {
-            StringValue = stringValue;
-            IntValue = intValue;
-        }
-
-        protected override void Load(ContainerBuilder builder)
-        {
-            builder.RegisterInstance(this).AsSelf();
-        }
+        StringValue = stringValue;
+        IntValue = intValue;
     }
 
-    // Another test module for testing module chaining
-    public class ChainedModule : Module
+    public string StringValue { get; }
+    public int IntValue { get; }
+
+    protected override void Load(ContainerBuilder builder)
     {
-        public string Value { get; }
+        builder.RegisterInstance(this).AsSelf();
+    }
+}
 
-        public ChainedModule() : this("default")
-        {
-        }
-
-        public ChainedModule(string value)
-        {
-            Value = value;
-        }
-
-        protected override void Load(ContainerBuilder builder)
-        {
-            builder.RegisterInstance(this).AsSelf();
-        }
+// Another test module for testing module chaining
+public class ChainedModule : Module
+{
+    public ChainedModule() : this("default")
+    {
     }
 
-    // Module that throws an exception during loading
-    public class ThrowingModule : Module
+    public ChainedModule(string value)
     {
-        protected override void Load(ContainerBuilder builder)
-        {
-            throw new InvalidOperationException("Test exception during module load");
-        }
+        Value = value;
     }
 
-    [TestFixture]
-    public class DIExtensionsTests
-    {
-        [Test]
-        public void RegisterModuleWithArgs_WhenCalled_RegistersModuleWithProvidedParameters()
-        {
-            //Arrange
-            var builder = new ContainerBuilder();
-            var expectedString = Guid.NewGuid().ToString();
-            var expectedInt = new Random().Next();
+    public string Value { get; }
 
-            //Act
+    protected override void Load(ContainerBuilder builder)
+    {
+        builder.RegisterInstance(this).AsSelf();
+    }
+}
+
+// Module that throws an exception during loading
+public class ThrowingModule : Module
+{
+    protected override void Load(ContainerBuilder builder)
+    {
+        throw new InvalidOperationException("Test exception during module load");
+    }
+}
+
+[TestFixture]
+public class DIExtensionsTests
+{
+    [Test]
+    public void RegisterModuleWithArgs_WhenCalled_RegistersModuleWithProvidedParameters()
+    {
+        //Arrange
+        var builder = new ContainerBuilder();
+        var expectedString = Guid.NewGuid().ToString();
+        var expectedInt = new Random().Next();
+
+        //Act
+        builder.RegisterModuleWithArgs<TestModule>(
+            new NamedParameter("stringValue", expectedString),
+            new NamedParameter("intValue", expectedInt));
+
+        using var container = builder.Build();
+
+        // Assert
+        var module = container.Resolve<TestModule>();
+        Assert.Multiple(() =>
+        {
+            Assert.That(module.StringValue, Is.EqualTo(expectedString));
+            Assert.That(module.IntValue, Is.EqualTo(expectedInt));
+        });
+    }
+
+    [Test]
+    public void RegisterModuleWithArgs_WhenCalledWithNoParameters_RegistersModuleWithDefaultConstructor()
+    {
+        // Arrange
+        var builder = new ContainerBuilder();
+
+        // Act - TestModule has a parameterless constructor that sets default values
+        builder.RegisterModuleWithArgs<ChainedModule>();
+
+        using var container = builder.Build();
+
+        // Assert - Should not throw when resolving
+        Assert.DoesNotThrow(() => container.Resolve<ChainedModule>());
+    }
+
+    [Test]
+    public void RegisterModuleWithArgs_WhenCalledWithMultipleModules_RegistersAllModules()
+    {
+        // Arrange
+        var builder = new ContainerBuilder();
+        const string value1 = "first";
+        const string value2 = "second";
+
+        // Act
+        builder.RegisterModuleWithArgs<ChainedModule>(new NamedParameter("value", value1));
+        builder.RegisterModuleWithArgs<ChainedModule>(new NamedParameter("value", value2));
+
+        using var container = builder.Build();
+
+        // Assert - Should resolve all registered modules
+        var modules = container.Resolve<IEnumerable<ChainedModule>>().ToList();
+        Assert.Multiple(() =>
+        {
+            Assert.That(modules, Has.Count.EqualTo(2));
+            Assert.That(modules.Select(m => m.Value), Is.EquivalentTo(new[] {value1, value2}));
+        });
+    }
+
+    [Test]
+    public void RegisterModuleWithArgs_WhenModuleThrowsInLoad_ThrowsDependencyResolutionException()
+    {
+        // Arrange
+        var builder = new ContainerBuilder();
+
+        // Act & Assert
+        Assert.Throws<InvalidOperationException>(
+            () =>
+            {
+                builder.RegisterModuleWithArgs<ThrowingModule>();
+                builder.Build();
+            });
+    }
+
+    [Test]
+    public void RegisterModuleWithArgs_WhenCalledWithNullBuilder_ThrowsArgumentNullException()
+    {
+        // Arrange
+        ContainerBuilder builder = null;
+
+        // Act & Assert
+        Assert.Throws<ArgumentNullException>(() =>
             builder.RegisterModuleWithArgs<TestModule>(
-                new NamedParameter("stringValue", expectedString),
-                new NamedParameter("intValue", expectedInt));
+                new NamedParameter("stringValue", "test"),
+                new NamedParameter("intValue", 1)));
+    }
 
-            using var container = builder.Build();
+    [Test]
+    public void RegisterModuleWithArgs_WhenCalledWithNullParameters_RegistersModuleWithDefaultConstructor()
+    {
+        // Arrange
+        var builder = new ContainerBuilder();
 
-            // Assert
-            var module = container.Resolve<TestModule>();
-            Assert.Multiple(() =>
+        // Act - Should use parameterless constructor
+        builder.RegisterModuleWithArgs<ChainedModule>();
+
+        using var container = builder.Build();
+
+        // Assert - Should not throw when resolving
+        Assert.DoesNotThrow(() => container.Resolve<ChainedModule>());
+    }
+
+    [Test]
+    public void WithParameters_WhenCalled_PassesParametersToRegistration()
+    {
+        // Arrange
+        var builder = new ContainerBuilder();
+        const string expectedParameter = "test_parameter";
+        builder.RegisterType<ServiceWithParameter>()
+            .WithParameters(new NamedParameter("data", expectedParameter));
+
+        using var container = builder.Build();
+
+        // Act
+        var instance = container.Resolve<ServiceWithParameter>();
+
+        // Assert
+        Assert.That(instance.Data, Is.EqualTo(expectedParameter));
+    }
+
+    [Test]
+    public void CreateInstance_ForServiceProvider_CreatesInstanceCorrectly()
+    {
+        // Arrange
+        var builder = new ContainerBuilder();
+        builder
+            .RegisterType<SimpleService>()
+            .SingleInstance();
+
+        using var container = builder.Build();
+        var serviceProvider = container.AsServiceProvider();
+
+        // Act
+        var instance = serviceProvider.CreateInstance<ServiceWithDependency>();
+
+        // Assert
+        Assert.IsNotNull(instance);
+        Assert.IsNotNull(instance.Dependency);
+        Assert.That(instance.Dependency, Is.EqualTo(container.Resolve<SimpleService>()));
+    }
+
+    [Test]
+    public void CreateInstance_ForComponentContext_CreatesInstanceCorrectly()
+    {
+        // Arrange
+        var builder = new ContainerBuilder();
+        builder
+            .RegisterType<SimpleService>()
+            .SingleInstance();
+
+        using var container = builder.Build();
+
+        // Act
+        var instance = container.CreateInstance<ServiceWithDependency>();
+
+        // Assert
+        Assert.IsNotNull(instance);
+        Assert.IsNotNull(instance.Dependency);
+        Assert.That(instance.Dependency, Is.EqualTo(container.Resolve<SimpleService>()));
+    }
+
+    [Test]
+    public void CreateInstance_WhenInstanceDisposable_InstanceIsNotDisposed_FromNew()
+    {
+        // Arrange
+        var builder = new ContainerBuilder();
+
+        var disposableTest = Substitute.For<IDisposable>();
+
+        builder
+            .RegisterInstance(disposableTest)
+            .As<IDisposable>()
+            .ExternallyOwned()
+            .SingleInstance();
+
+        builder
+            .RegisterIFactoryExtended<DisposeChecker>()
+            .FromNewInstance()
+            .SingleInstance();
+
+        using var container = builder.Build();
+
+        // Act
+        using var instance = container.Resolve<IFactory<DisposeChecker>>().Create();
+
+        // Assert
+        Assert.IsNotNull(instance);
+        disposableTest.Received(0).Dispose();
+    }
+
+    [Test]
+    public void CreateInstance_WhenInstanceDisposable_InstanceIsNotDisposed()
+    {
+        // Arrange
+        var builder = new ContainerBuilder();
+
+        var disposableTest = Substitute.For<IDisposable>();
+
+        builder
+            .RegisterInstance(disposableTest)
+            .As<IDisposable>()
+            .ExternallyOwned()
+            .SingleInstance();
+
+        using var container = builder.Build();
+
+        // Act
+        using var instance = container.CreateInstance<DisposeChecker>();
+
+        // Assert
+        Assert.IsNotNull(instance);
+        disposableTest.Received(0).Dispose();
+    }
+
+    [Test]
+    public void CreateInstance_WhenInstanceDisposable_InstanceIsNotDisposed_FromFunction()
+    {
+        // Arrange
+        var builder = new ContainerBuilder();
+
+        var disposableTest = Substitute.For<IDisposable>();
+
+        builder
+            .RegisterInstance(disposableTest)
+            .As<IDisposable>()
+            .ExternallyOwned()
+            .SingleInstance();
+
+        builder
+            .RegisterIFactoryExtended<DisposeChecker>()
+            .FromFunction(scope => scope.CreateInstance<DisposeChecker>())
+            .SingleInstance();
+
+        using var container = builder.Build();
+
+        // Act
+        using var instance = container.Resolve<IFactory<DisposeChecker>>().Create();
+
+        // Assert
+        Assert.IsNotNull(instance);
+        disposableTest.Received(0).Dispose();
+    }
+
+    [Test]
+    public void CreateInstance_WhenInstanceDisposable_InstanceIsNotDisposed_FromSubContainer()
+    {
+        // Arrange
+        var builder = new ContainerBuilder();
+
+        var disposableTest = Substitute.For<IDisposable>();
+
+        builder
+            .RegisterInstance(disposableTest)
+            .As<IDisposable>()
+            .ExternallyOwned()
+            .SingleInstance();
+
+        builder
+            .RegisterIFactoryExtended<DisposeChecker>()
+            .FromSubScope()
+            .ByFunction(subContainer =>
             {
-                Assert.That(module.StringValue, Is.EqualTo(expectedString));
-                Assert.That(module.IntValue, Is.EqualTo(expectedInt));
-            });
-        }
+                subContainer
+                    .RegisterType<DisposeChecker>()
+                    .SingleInstance();
+            })
+            .SingleInstance();
 
-        [Test]
-        public void RegisterModuleWithArgs_WhenCalledWithNoParameters_RegistersModuleWithDefaultConstructor()
-        {
-            // Arrange
-            var builder = new ContainerBuilder();
+        using var container = builder.Build();
 
-            // Act - TestModule has a parameterless constructor that sets default values
-            builder.RegisterModuleWithArgs<ChainedModule>();
+        // Act
+        using var instance = container.Resolve<IFactory<DisposeChecker>>().Create();
 
-            using var container = builder.Build();
+        // Assert
+        Assert.IsNotNull(instance);
+        disposableTest.Received(0).Dispose();
+    }
 
-            // Assert - Should not throw when resolving
-            Assert.DoesNotThrow(() => container.Resolve<ChainedModule>());
-        }
+    [Test]
+    public void AsServiceProvider_WhenCalled_ResolvesServices()
+    {
+        // Arrange
+        var builder = new ContainerBuilder();
+        builder.RegisterType<SimpleService>().As<IService>();
+        using var container = builder.Build();
+        var serviceProvider = container.AsServiceProvider();
 
-        [Test]
-        public void RegisterModuleWithArgs_WhenCalledWithMultipleModules_RegistersAllModules()
-        {
-            // Arrange
-            var builder = new ContainerBuilder();
-            const string value1 = "first";
-            const string value2 = "second";
+        // Act
+        var service = serviceProvider.GetService(typeof(IService));
 
-            // Act
-            builder.RegisterModuleWithArgs<ChainedModule>(new NamedParameter("value", value1));
-            builder.RegisterModuleWithArgs<ChainedModule>(new NamedParameter("value", value2));
+        // Assert
+        Assert.IsNotNull(service);
+        Assert.IsInstanceOf<SimpleService>(service);
+    }
 
-            using var container = builder.Build();
+    [Test]
+    public void RegisterFromSubScope_GotDependencyFromSubScope()
+    {
+        // Arrange
+        var builder = new ContainerBuilder();
 
-            // Assert - Should resolve all registered modules
-            var modules = container.Resolve<IEnumerable<ChainedModule>>().ToList();
-            Assert.Multiple(() =>
-            {
-                Assert.That(modules, Has.Count.EqualTo(2));
-                Assert.That(modules.Select(m => m.Value), Is.EquivalentTo(new[] { value1, value2 }));
-            });
-        }
+        var externalInstance = new SimpleService();
+        var subScopeInstance = new SimpleService();
 
-        [Test]
-        public void RegisterModuleWithArgs_WhenModuleThrowsInLoad_ThrowsDependencyResolutionException()
-        {
-            // Arrange
-            var builder = new ContainerBuilder();
+        builder
+            .RegisterInstance(externalInstance)
+            .As<SimpleService>()
+            .SingleInstance();
 
-            // Act & Assert
-            Assert.Throws<InvalidOperationException>(
-                () =>
+        builder
+            .RegisterExtended<ServiceWithDependencyDisposable>()
+            .FromSubScope()
+            .ByFunction(
+                subContainerBuilder =>
                 {
-                    builder.RegisterModuleWithArgs<ThrowingModule>();
-                    builder.Build();
-                });
+                    subContainerBuilder
+                        .RegisterType<ServiceWithDependencyDisposable>()
+                        .SingleInstance();
+
+                    subContainerBuilder
+                        .RegisterInstance(subScopeInstance)
+                        .As<SimpleService>()
+                        .SingleInstance();
+                })
+            .SingleInstance();
+
+        using var container = builder.Build();
+
+        // Act
+        var instance = container.Resolve<ServiceWithDependencyDisposable>();
+
+        // Assert
+        Assert.That(instance.Dependency, Is.EqualTo(subScopeInstance));
+    }
+
+    [Test]
+    public void RegisterFromSubScope_SubContainerDisposedWithInstance()
+    {
+        // Arrange
+        var builder = new ContainerBuilder();
+
+        var mockSubContainerDisposable = Substitute.For<IDisposable>();
+        var mockExternalDisposable = Substitute.For<IDisposable>();
+
+        builder
+            .RegisterInstance(mockExternalDisposable)
+            .As<IDisposable>()
+            .SingleInstance();
+
+        builder
+            .RegisterExtended<ServiceWithDependencyDisposable>()
+            .FromSubScope()
+            .ByFunction(
+                subContainerBuilder =>
+                {
+                    subContainerBuilder
+                        .RegisterType<ServiceWithDependencyDisposable>()
+                        .SingleInstance();
+
+                    subContainerBuilder
+                        .RegisterType<SimpleService>()
+                        .SingleInstance();
+
+                    subContainerBuilder
+                        .RegisterInstance(mockSubContainerDisposable)
+                        .As<IDisposable>()
+                        .SingleInstance();
+                })
+            .SingleInstance()
+            .ExternallyOwned();
+
+        using var container = builder.Build();
+
+        // Act
+        using (var _ = container.Resolve<ServiceWithDependencyDisposable>())
+        {
         }
 
-        [Test]
-        public void RegisterModuleWithArgs_WhenCalledWithNullBuilder_ThrowsArgumentNullException()
-        {
-            // Arrange
-            ContainerBuilder builder = null;
+        // Assert
+        mockSubContainerDisposable.Received(1).Dispose();
+        mockExternalDisposable.Received(0).Dispose();
+    }
 
-            // Act & Assert
-            Assert.Throws<ArgumentNullException>(() =>
-                builder.RegisterModuleWithArgs<TestModule>(
-                    new NamedParameter("stringValue", "test"),
-                    new NamedParameter("intValue", 1)));
+    internal class ServiceWithDependencyModule : Module
+    {
+        private readonly SimpleService _service;
+
+        public ServiceWithDependencyModule(SimpleService service)
+        {
+            _service = service ?? throw new ArgumentNullException(nameof(service));
         }
 
-        [Test]
-        public void RegisterModuleWithArgs_WhenCalledWithNullParameters_RegistersModuleWithDefaultConstructor()
+        protected override void Load(ContainerBuilder builder)
         {
-            // Arrange
-            var builder = new ContainerBuilder();
-
-            // Act - Should use parameterless constructor
-            builder.RegisterModuleWithArgs<ChainedModule>();
-
-            using var container = builder.Build();
-
-            // Assert - Should not throw when resolving
-            Assert.DoesNotThrow(() => container.Resolve<ChainedModule>());
-        }
-
-        [Test]
-        public void WithParameters_WhenCalled_PassesParametersToRegistration()
-        {
-            // Arrange
-            var builder = new ContainerBuilder();
-            const string expectedParameter = "test_parameter";
-            builder.RegisterType<ServiceWithParameter>()
-                .WithParameters(new NamedParameter("data", expectedParameter));
-
-            using var container = builder.Build();
-
-            // Act
-            var instance = container.Resolve<ServiceWithParameter>();
-
-            // Assert
-            Assert.That(instance.Data, Is.EqualTo(expectedParameter));
-        }
-
-        [Test]
-        public void CreateInstance_ForServiceProvider_CreatesInstanceCorrectly()
-        {
-            // Arrange
-            var builder = new ContainerBuilder();
             builder
-                .RegisterType<SimpleService>()
+                .RegisterType<ServiceWithDependencyDisposable>()
                 .SingleInstance();
 
-            using var container = builder.Build();
-            var serviceProvider = container.AsServiceProvider();
-
-            // Act
-            var instance = serviceProvider.CreateInstance<ServiceWithDependency>();
-
-            // Assert
-            Assert.IsNotNull(instance);
-            Assert.IsNotNull(instance.Dependency);
-            Assert.That(instance.Dependency, Is.EqualTo(container.Resolve<SimpleService>()));
-        }
-
-        [Test]
-        public void CreateInstance_ForComponentContext_CreatesInstanceCorrectly()
-        {
-            // Arrange
-            var builder = new ContainerBuilder();
             builder
-                .RegisterType<SimpleService>()
-                .SingleInstance();
-
-            using var container = builder.Build();
-
-            // Act
-            var instance = container.CreateInstance<ServiceWithDependency>();
-
-            // Assert
-            Assert.IsNotNull(instance);
-            Assert.IsNotNull(instance.Dependency);
-            Assert.That(instance.Dependency, Is.EqualTo(container.Resolve<SimpleService>()));
-        }
-
-        [Test]
-        public void AsServiceProvider_WhenCalled_ResolvesServices()
-        {
-            // Arrange
-            var builder = new ContainerBuilder();
-            builder.RegisterType<SimpleService>().As<IService>();
-            using var container = builder.Build();
-            var serviceProvider = container.AsServiceProvider();
-
-            // Act
-            var service = serviceProvider.GetService(typeof(IService));
-
-            // Assert
-            Assert.IsNotNull(service);
-            Assert.IsInstanceOf<SimpleService>(service);
-        }
-
-        [Test]
-        public void RegisterFromSubScope_GotDependencyFromSubScope()
-        {
-            // Arrange
-            var builder = new ContainerBuilder();
-
-            var externalInstance = new SimpleService();
-            var subScopeInstance = new SimpleService();
-
-            builder
-                .RegisterInstance(externalInstance)
+                .RegisterInstance(_service)
                 .As<SimpleService>()
                 .SingleInstance();
+        }
+    }
 
-            builder
-                .RegisterExtended<ServiceWithDependencyDisposable>()
-                .FromSubScope()
-                .ByFunction(
-                    subContainerBuilder =>
-                    {
-                        subContainerBuilder
-                            .RegisterType<ServiceWithDependencyDisposable>()
-                            .SingleInstance();
+    [Test]
+    public void Register_FromSubScope_ByInstaller()
+    {
+        // Arrange
+        var builder = new ContainerBuilder();
 
-                        subContainerBuilder
-                            .RegisterInstance(subScopeInstance)
-                            .As<SimpleService>()
-                            .SingleInstance();
-                    })
-                .SingleInstance();
+        var externalInstance = new SimpleService();
+        var internalService = new SimpleService();
 
-            using var container = builder.Build();
+        builder
+            .RegisterInstance(externalInstance)
+            .As<SimpleService>()
+            .SingleInstance();
 
-            // Act
-            var instance = container.Resolve<ServiceWithDependencyDisposable>();
+        builder
+            .RegisterExtended<ServiceWithDependencyDisposable>()
+            .FromSubScope()
+            .ByModule<ServiceWithDependencyModule>(scope
+                => scope.CreateInstance<ServiceWithDependencyModule>(internalService))
+            .SingleInstance();
 
-            // Assert
-            Assert.That(instance.Dependency, Is.EqualTo(subScopeInstance));
+        using var container = builder.Build();
+
+        // Act
+        var instance = container.Resolve<ServiceWithDependencyDisposable>();
+
+        // Assert
+        Assert.That(instance.Dependency, Is.EqualTo(internalService));
+    }
+
+    [Test]
+    public void Register_FromSubScope_ByInstaller_WhenExternalDependencies()
+    {
+        // Arrange
+        var builder = new ContainerBuilder();
+
+        var externalInstance = new SimpleService();
+
+        builder
+            .RegisterInstance(externalInstance)
+            .As<SimpleService>()
+            .SingleInstance();
+
+        builder
+            .RegisterExtended<ServiceWithDependencyDisposable>()
+            .FromSubScope()
+            .ByModule<ServiceWithDependencyModule>()
+            .SingleInstance();
+
+        using var container = builder.Build();
+
+        // Act
+        var instance = container.Resolve<ServiceWithDependencyDisposable>();
+
+        // Assert
+        Assert.That(instance.Dependency, Is.EqualTo(externalInstance));
+    }
+
+    // Test Classes
+
+    private class DisposeChecker : Disposer
+    {
+        public DisposeChecker(IDisposable disposable)
+        {
+            disposable.AddTo(this);
+        }
+    }
+    public interface IService
+    {
+    }
+
+    public class SimpleService : IService
+    {
+    }
+
+    public class ServiceWithParameter
+    {
+        public ServiceWithParameter(string data)
+        {
+            Data = data;
         }
 
-        [Test]
-        public void RegisterFromSubScope_SubContainerDisposedWithInstance()
+        public string Data { get; }
+    }
+
+    public class ServiceWithDependency
+    {
+        public ServiceWithDependency(SimpleService dependency)
         {
-            // Arrange
-            var builder = new ContainerBuilder();
-
-            var mockSubContainerDisposable = Substitute.For<IDisposable>();
-            var mockExternalDisposable = Substitute.For<IDisposable>();
-
-            builder
-                .RegisterInstance(mockExternalDisposable)
-                .As<IDisposable>()
-                .SingleInstance();
-
-            builder
-                .RegisterExtended<ServiceWithDependencyDisposable>()
-                .FromSubScope()
-                .ByFunction(
-                    subContainerBuilder =>
-                    {
-                        subContainerBuilder
-                            .RegisterType<ServiceWithDependencyDisposable>()
-                            .SingleInstance();
-
-                        subContainerBuilder
-                            .RegisterType<SimpleService>()
-                            .SingleInstance();
-
-                        subContainerBuilder
-                            .RegisterInstance(mockSubContainerDisposable)
-                            .As<IDisposable>()
-                            .SingleInstance();
-                    })
-                .SingleInstance()
-                .ExternallyOwned();
-
-            using var container = builder.Build();
-
-            // Act
-            using (var _ = container.Resolve<ServiceWithDependencyDisposable>())
-            {
-            }
-
-            // Assert
-            mockSubContainerDisposable.Received(1).Dispose();
-            mockExternalDisposable.Received(0).Dispose();
+            Dependency = dependency;
         }
 
-        internal class ServiceWithDependencyInstaller : Module
+        public SimpleService Dependency { get; }
+    }
+
+    public class ServiceWithDependencyDisposable : ServiceWithDependency, IDisposer
+    {
+        private readonly IDisposer _disposerImplementation;
+
+        public ServiceWithDependencyDisposable(SimpleService dependency)
+            : base(dependency)
         {
-            private readonly SimpleService _service;
-
-            public ServiceWithDependencyInstaller(SimpleService service)
-            {
-                _service = service ?? throw new ArgumentNullException(nameof(service));
-            }
-
-            protected override void Load(ContainerBuilder builder)
-            {
-                builder
-                    .RegisterType<ServiceWithDependencyDisposable>()
-                    .SingleInstance();
-
-                builder
-                    .RegisterInstance(_service)
-                    .As<SimpleService>()
-                    .SingleInstance();
-            }
+            _disposerImplementation = new Disposer();
         }
 
-        [Test]
-        public void Register_FromSubScope_ByInstaller()
+        public ValueTask DisposeAsync()
         {
-            // Arrange
-            var builder = new ContainerBuilder();
-
-            var externalInstance = new SimpleService();
-            var internalService = new SimpleService();
-
-            builder
-                .RegisterInstance(externalInstance)
-                .As<SimpleService>()
-                .SingleInstance();
-
-            builder
-                .RegisterExtended<ServiceWithDependencyDisposable>()
-                .FromSubScope()
-                .ByModule<ServiceWithDependencyInstaller>((scope)
-                    => scope.CreateInstance<ServiceWithDependencyInstaller>(internalService))
-                .SingleInstance();
-
-            using var container = builder.Build();
-
-            // Act
-            var instance = container.Resolve<ServiceWithDependencyDisposable>();
-
-            // Assert
-            Assert.That(instance.Dependency, Is.EqualTo(internalService));
+            return _disposerImplementation.DisposeAsync();
         }
 
-        [Test]
-        public void Register_FromSubScope_ByInstaller_WhenExternalDependencies()
+        public void AddInstanceForDisposal(IDisposable instance)
         {
-            // Arrange
-            var builder = new ContainerBuilder();
-
-            var externalInstance = new SimpleService();
-
-            builder
-                .RegisterInstance(externalInstance)
-                .As<SimpleService>()
-                .SingleInstance();
-
-            builder
-                .RegisterExtended<ServiceWithDependencyDisposable>()
-                .FromSubScope()
-                .ByModule<ServiceWithDependencyInstaller>()
-                .SingleInstance();
-
-            using var container = builder.Build();
-
-            // Act
-            var instance = container.Resolve<ServiceWithDependencyDisposable>();
-
-            // Assert
-            Assert.That(instance.Dependency, Is.EqualTo(externalInstance));
+            _disposerImplementation.AddInstanceForDisposal(instance);
         }
 
-        // Test Classes
-        public interface IService
+        public void AddInstanceForAsyncDisposal(IAsyncDisposable instance)
         {
+            _disposerImplementation.AddInstanceForAsyncDisposal(instance);
         }
 
-        public class SimpleService : IService
+        public void Dispose()
         {
-        }
-
-        public class ServiceWithParameter
-        {
-            public ServiceWithParameter(string data)
-            {
-                Data = data;
-            }
-
-            public string Data { get; }
-        }
-
-        public class ServiceWithDependency
-        {
-            public ServiceWithDependency(SimpleService dependency)
-            {
-                Dependency = dependency;
-            }
-
-            public SimpleService Dependency { get; }
-        }
-
-        public class ServiceWithDependencyDisposable : ServiceWithDependency, IDisposer
-        {
-            private readonly IDisposer _disposerImplementation;
-
-            public ServiceWithDependencyDisposable(SimpleService dependency)
-                : base(dependency)
-            {
-                _disposerImplementation = new ZenAutofac.Entities.Disposer();
-            }
-
-            public ValueTask DisposeAsync()
-            {
-                return _disposerImplementation.DisposeAsync();
-            }
-
-            public void AddInstanceForDisposal(IDisposable instance)
-            {
-                _disposerImplementation.AddInstanceForDisposal(instance);
-            }
-
-            public void AddInstanceForAsyncDisposal(IAsyncDisposable instance)
-            {
-                _disposerImplementation.AddInstanceForAsyncDisposal(instance);
-            }
-
-            public void Dispose()
-            {
-                _disposerImplementation.Dispose();
-            }
+            _disposerImplementation.Dispose();
         }
     }
 }

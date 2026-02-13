@@ -101,7 +101,8 @@ namespace ZenAutofac
                            .RegisterType<T>()
                            .WithParameters(parameters)
                            .SingleInstance()
-                           .WithAttributeFiltering();
+                           .WithAttributeFiltering()
+                           .ExternallyOwned();
                    }))
             {
                 return subScope.Resolve<T>();
