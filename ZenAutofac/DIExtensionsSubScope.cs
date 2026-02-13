@@ -428,7 +428,7 @@ namespace ZenAutofac
                     {
                         scopeBuilder.OverrideExternallyOwnedInScope<TComponent>(guid);
                         var module = moduleFactory == null
-                            ? scope.CreateInstance<TModule>(param0)
+                            ? scope.CreateInstance<TModule>(TypedParameter.From(param0))
                             : moduleFactory.Invoke(scope, param0);
                         scopeBuilder.RegisterModule(module);
                     });
@@ -457,8 +457,8 @@ namespace ZenAutofac
                     {
                         scopeBuilder.OverrideExternallyOwnedInScope<TComponent>(guid);
                         var module = moduleFactory == null
-                            ? scope.CreateInstance<TModule>(param0,
-							param1)
+                            ? scope.CreateInstance<TModule>(TypedParameter.From(param0),
+							TypedParameter.From(param1))
                             : moduleFactory.Invoke(scope, param0, param1);
                         scopeBuilder.RegisterModule(module);
                     });
@@ -488,9 +488,9 @@ namespace ZenAutofac
                     {
                         scopeBuilder.OverrideExternallyOwnedInScope<TComponent>(guid);
                         var module = moduleFactory == null
-                            ? scope.CreateInstance<TModule>(param0,
-							param1,
-							param2)
+                            ? scope.CreateInstance<TModule>(TypedParameter.From(param0),
+							TypedParameter.From(param1),
+							TypedParameter.From(param2))
                             : moduleFactory.Invoke(scope, param0, param1, param2);
                         scopeBuilder.RegisterModule(module);
                     });
@@ -521,10 +521,10 @@ namespace ZenAutofac
                     {
                         scopeBuilder.OverrideExternallyOwnedInScope<TComponent>(guid);
                         var module = moduleFactory == null
-                            ? scope.CreateInstance<TModule>(param0,
-							param1,
-							param2,
-							param3)
+                            ? scope.CreateInstance<TModule>(TypedParameter.From(param0),
+							TypedParameter.From(param1),
+							TypedParameter.From(param2),
+							TypedParameter.From(param3))
                             : moduleFactory.Invoke(scope, param0, param1, param2, param3);
                         scopeBuilder.RegisterModule(module);
                     });
@@ -556,11 +556,11 @@ namespace ZenAutofac
                     {
                         scopeBuilder.OverrideExternallyOwnedInScope<TComponent>(guid);
                         var module = moduleFactory == null
-                            ? scope.CreateInstance<TModule>(param0,
-							param1,
-							param2,
-							param3,
-							param4)
+                            ? scope.CreateInstance<TModule>(TypedParameter.From(param0),
+							TypedParameter.From(param1),
+							TypedParameter.From(param2),
+							TypedParameter.From(param3),
+							TypedParameter.From(param4))
                             : moduleFactory.Invoke(scope, param0, param1, param2, param3, param4);
                         scopeBuilder.RegisterModule(module);
                     });
@@ -593,12 +593,12 @@ namespace ZenAutofac
                     {
                         scopeBuilder.OverrideExternallyOwnedInScope<TComponent>(guid);
                         var module = moduleFactory == null
-                            ? scope.CreateInstance<TModule>(param0,
-							param1,
-							param2,
-							param3,
-							param4,
-							param5)
+                            ? scope.CreateInstance<TModule>(TypedParameter.From(param0),
+							TypedParameter.From(param1),
+							TypedParameter.From(param2),
+							TypedParameter.From(param3),
+							TypedParameter.From(param4),
+							TypedParameter.From(param5))
                             : moduleFactory.Invoke(scope, param0, param1, param2, param3, param4, param5);
                         scopeBuilder.RegisterModule(module);
                     });
@@ -632,13 +632,13 @@ namespace ZenAutofac
                     {
                         scopeBuilder.OverrideExternallyOwnedInScope<TComponent>(guid);
                         var module = moduleFactory == null
-                            ? scope.CreateInstance<TModule>(param0,
-							param1,
-							param2,
-							param3,
-							param4,
-							param5,
-							param6)
+                            ? scope.CreateInstance<TModule>(TypedParameter.From(param0),
+							TypedParameter.From(param1),
+							TypedParameter.From(param2),
+							TypedParameter.From(param3),
+							TypedParameter.From(param4),
+							TypedParameter.From(param5),
+							TypedParameter.From(param6))
                             : moduleFactory.Invoke(scope, param0, param1, param2, param3, param4, param5, param6);
                         scopeBuilder.RegisterModule(module);
                     });
@@ -673,14 +673,14 @@ namespace ZenAutofac
                     {
                         scopeBuilder.OverrideExternallyOwnedInScope<TComponent>(guid);
                         var module = moduleFactory == null
-                            ? scope.CreateInstance<TModule>(param0,
-							param1,
-							param2,
-							param3,
-							param4,
-							param5,
-							param6,
-							param7)
+                            ? scope.CreateInstance<TModule>(TypedParameter.From(param0),
+							TypedParameter.From(param1),
+							TypedParameter.From(param2),
+							TypedParameter.From(param3),
+							TypedParameter.From(param4),
+							TypedParameter.From(param5),
+							TypedParameter.From(param6),
+							TypedParameter.From(param7))
                             : moduleFactory.Invoke(scope, param0, param1, param2, param3, param4, param5, param6, param7);
                         scopeBuilder.RegisterModule(module);
                     });
@@ -716,15 +716,15 @@ namespace ZenAutofac
                     {
                         scopeBuilder.OverrideExternallyOwnedInScope<TComponent>(guid);
                         var module = moduleFactory == null
-                            ? scope.CreateInstance<TModule>(param0,
-							param1,
-							param2,
-							param3,
-							param4,
-							param5,
-							param6,
-							param7,
-							param8)
+                            ? scope.CreateInstance<TModule>(TypedParameter.From(param0),
+							TypedParameter.From(param1),
+							TypedParameter.From(param2),
+							TypedParameter.From(param3),
+							TypedParameter.From(param4),
+							TypedParameter.From(param5),
+							TypedParameter.From(param6),
+							TypedParameter.From(param7),
+							TypedParameter.From(param8))
                             : moduleFactory.Invoke(scope, param0, param1, param2, param3, param4, param5, param6, param7, param8);
                         scopeBuilder.RegisterModule(module);
                     });
@@ -761,16 +761,16 @@ namespace ZenAutofac
                     {
                         scopeBuilder.OverrideExternallyOwnedInScope<TComponent>(guid);
                         var module = moduleFactory == null
-                            ? scope.CreateInstance<TModule>(param0,
-							param1,
-							param2,
-							param3,
-							param4,
-							param5,
-							param6,
-							param7,
-							param8,
-							param9)
+                            ? scope.CreateInstance<TModule>(TypedParameter.From(param0),
+							TypedParameter.From(param1),
+							TypedParameter.From(param2),
+							TypedParameter.From(param3),
+							TypedParameter.From(param4),
+							TypedParameter.From(param5),
+							TypedParameter.From(param6),
+							TypedParameter.From(param7),
+							TypedParameter.From(param8),
+							TypedParameter.From(param9))
                             : moduleFactory.Invoke(scope, param0, param1, param2, param3, param4, param5, param6, param7, param8, param9);
                         scopeBuilder.RegisterModule(module);
                     });

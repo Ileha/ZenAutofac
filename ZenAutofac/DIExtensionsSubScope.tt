@@ -65,7 +65,7 @@ namespace ZenAutofac
                     {
                         scopeBuilder.OverrideExternallyOwnedInScope<TComponent>(guid);
                         var module = moduleFactory == null
-                            ? scope.CreateInstance<TModule>(<#=string.Join(",\n\t\t\t\t\t\t\t", Enumerable.Repeat(0, i).Select((_, j) => $"param{j}")) #>)
+                            ? scope.CreateInstance<TModule>(<#=string.Join(",\n\t\t\t\t\t\t\t", Enumerable.Repeat(0, i).Select((_, j) => $"TypedParameter.From(param{j})")) #>)
                             : moduleFactory.Invoke(scope<#= i == 0 ? "" : ", " #><#=string.Join(", ", Enumerable.Repeat(0, i).Select((_, j) => $"param{j}")) #>);
                         scopeBuilder.RegisterModule(module);
                     });
