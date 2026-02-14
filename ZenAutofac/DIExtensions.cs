@@ -4,6 +4,7 @@ using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
 using Autofac.Core.Registration;
+using Autofac.Features.AttributeFilters;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using ZenAutofac.Builders.Decorator;
@@ -85,6 +86,27 @@ namespace ZenAutofac
                 throw new ArgumentNullException(nameof(scope));
 
             return scope.AsServiceProvider().CreateInstance<T>(parameters);
+        }
+
+        public static T CreateInstance<T>(this ILifetimeScope scope, params Parameter[] parameters)
+            where T : class
+        {
+            if (scope is null)
+                throw new ArgumentNullException(nameof(scope));
+
+            // ReSharper disable once ConvertToUsingDeclaration
+            using (var subScope = scope.BeginLifetimeScope(subScopeBuilder =>
+                   {
+                       subScopeBuilder
+                           .RegisterType<T>()
+                           .WithParameters(parameters)
+                           .SingleInstance()
+                           .WithAttributeFiltering()
+                           .ExternallyOwned();
+                   }))
+            {
+                return subScope.Resolve<T>();
+            }
         }
 
         public static IExtendedRegistrationBuilder<T> RegisterExtended<T>(this ContainerBuilder builder)

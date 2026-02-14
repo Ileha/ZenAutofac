@@ -38,7 +38,7 @@ namespace ZenAutofac.Entities.Factories
 
             public TInstance Create(TP0 param0)
             {
-                return _scope.CreateInstance<TInstance>(param0);
+                return _scope.CreateInstance<TInstance>(TypedParameter.From(param0));
             }
         }
 
@@ -55,7 +55,7 @@ namespace ZenAutofac.Entities.Factories
 
             public TInstance Create(TP0 param0, TP1 param1)
             {
-                return _scope.CreateInstance<TInstance>(param0, param1);
+                return _scope.CreateInstance<TInstance>(TypedParameter.From(param0), TypedParameter.From(param1));
             }
         }
 
@@ -72,7 +72,7 @@ namespace ZenAutofac.Entities.Factories
 
             public TInstance Create(TP0 param0, TP1 param1, TP2 param2)
             {
-                return _scope.CreateInstance<TInstance>(param0, param1, param2);
+                return _scope.CreateInstance<TInstance>(TypedParameter.From(param0), TypedParameter.From(param1), TypedParameter.From(param2));
             }
         }
 
@@ -89,7 +89,7 @@ namespace ZenAutofac.Entities.Factories
 
             public TInstance Create(TP0 param0, TP1 param1, TP2 param2, TP3 param3)
             {
-                return _scope.CreateInstance<TInstance>(param0, param1, param2, param3);
+                return _scope.CreateInstance<TInstance>(TypedParameter.From(param0), TypedParameter.From(param1), TypedParameter.From(param2), TypedParameter.From(param3));
             }
         }
 
@@ -106,7 +106,7 @@ namespace ZenAutofac.Entities.Factories
 
             public TInstance Create(TP0 param0, TP1 param1, TP2 param2, TP3 param3, TP4 param4)
             {
-                return _scope.CreateInstance<TInstance>(param0, param1, param2, param3, param4);
+                return _scope.CreateInstance<TInstance>(TypedParameter.From(param0), TypedParameter.From(param1), TypedParameter.From(param2), TypedParameter.From(param3), TypedParameter.From(param4));
             }
         }
 
@@ -123,7 +123,7 @@ namespace ZenAutofac.Entities.Factories
 
             public TInstance Create(TP0 param0, TP1 param1, TP2 param2, TP3 param3, TP4 param4, TP5 param5)
             {
-                return _scope.CreateInstance<TInstance>(param0, param1, param2, param3, param4, param5);
+                return _scope.CreateInstance<TInstance>(TypedParameter.From(param0), TypedParameter.From(param1), TypedParameter.From(param2), TypedParameter.From(param3), TypedParameter.From(param4), TypedParameter.From(param5));
             }
         }
 
@@ -140,7 +140,7 @@ namespace ZenAutofac.Entities.Factories
 
             public TInstance Create(TP0 param0, TP1 param1, TP2 param2, TP3 param3, TP4 param4, TP5 param5, TP6 param6)
             {
-                return _scope.CreateInstance<TInstance>(param0, param1, param2, param3, param4, param5, param6);
+                return _scope.CreateInstance<TInstance>(TypedParameter.From(param0), TypedParameter.From(param1), TypedParameter.From(param2), TypedParameter.From(param3), TypedParameter.From(param4), TypedParameter.From(param5), TypedParameter.From(param6));
             }
         }
 
@@ -157,7 +157,7 @@ namespace ZenAutofac.Entities.Factories
 
             public TInstance Create(TP0 param0, TP1 param1, TP2 param2, TP3 param3, TP4 param4, TP5 param5, TP6 param6, TP7 param7)
             {
-                return _scope.CreateInstance<TInstance>(param0, param1, param2, param3, param4, param5, param6, param7);
+                return _scope.CreateInstance<TInstance>(TypedParameter.From(param0), TypedParameter.From(param1), TypedParameter.From(param2), TypedParameter.From(param3), TypedParameter.From(param4), TypedParameter.From(param5), TypedParameter.From(param6), TypedParameter.From(param7));
             }
         }
 
@@ -174,7 +174,7 @@ namespace ZenAutofac.Entities.Factories
 
             public TInstance Create(TP0 param0, TP1 param1, TP2 param2, TP3 param3, TP4 param4, TP5 param5, TP6 param6, TP7 param7, TP8 param8)
             {
-                return _scope.CreateInstance<TInstance>(param0, param1, param2, param3, param4, param5, param6, param7, param8);
+                return _scope.CreateInstance<TInstance>(TypedParameter.From(param0), TypedParameter.From(param1), TypedParameter.From(param2), TypedParameter.From(param3), TypedParameter.From(param4), TypedParameter.From(param5), TypedParameter.From(param6), TypedParameter.From(param7), TypedParameter.From(param8));
             }
         }
 
@@ -191,7 +191,7 @@ namespace ZenAutofac.Entities.Factories
 
             public TInstance Create(TP0 param0, TP1 param1, TP2 param2, TP3 param3, TP4 param4, TP5 param5, TP6 param6, TP7 param7, TP8 param8, TP9 param9)
             {
-                return _scope.CreateInstance<TInstance>(param0, param1, param2, param3, param4, param5, param6, param7, param8, param9);
+                return _scope.CreateInstance<TInstance>(TypedParameter.From(param0), TypedParameter.From(param1), TypedParameter.From(param2), TypedParameter.From(param3), TypedParameter.From(param4), TypedParameter.From(param5), TypedParameter.From(param6), TypedParameter.From(param7), TypedParameter.From(param8), TypedParameter.From(param9));
             }
         }
 
