@@ -450,7 +450,7 @@ builder
     .ByModule<ServiceModule>();
 ```
 
-Registration sample with extra parameters via [service provider](#icomponentcontextcreateinstance):
+Registration sample with extra parameters via [CreateInstance](#createinstance):
 ```csharp
 builder
     .RegisterPlaceholderFactoryExtended<string, IService, MyCustomServiceFactory>()
@@ -482,9 +482,14 @@ class MyCustomServiceFactory : PlaceholderFactory<string, IService>
 
 `CompositeDisposable` is removed from the project, please use `Disposer` instead, see [this](#disposer-related)
 
-#### IComponentContext.CreateInstance
+#### CreateInstance
 
-Use `IComponentContext.CreateInstance` to create instance of type with using DI container:
+##### IComponentContext.CreateInstance
+
+Use `IComponentContext.CreateInstance` to create instance of type with using DI container.
+Internally transforms `IComponentContext` to `IServiceProvider` and create instance via reflection.
+In most cases works, but for some advanced features please use [ILifetimeScope.CreateInstance](#ilifetimescopecreateinstance)
+example:
 
 ```csharp
 builder
@@ -498,6 +503,38 @@ builder
     })
     .As<ISampleService>()
     .SingleInstance();
+```
+##### ILifetimeScope.CreateInstance
+
+Use `ILifetimeScope.CreateInstance` to create instance of type with using DI container.
+Internally creates new lifetime scope and creates `T` there. Use it for most accurate instance creation.
+In spite of usage Autofac API this approach should support autofac features like Autofac attributes etc.
+example:
+
+```csharp
+builder
+    .Register<SampleService>(context =>
+    {
+        var result = context.CreateInstance<SampleService>(TypedParameter.From(Guid.NewGuid()));
+
+        result.Setup();
+
+        return result;
+    })
+    .As<ISampleService>()
+    .SingleInstance();
+```
+
+#### RegisterModuleWithArgs
+Used to register module in autofac style, don't pass any dependencies from DI. Only one provided in parameters.
+
+```csharp
+var builder = new ContainerBuilder();
+
+builder.RegisterModuleWithArgs<TestModule>(
+                new NamedParameter("stringValue", stringParameter),
+                new NamedParameter("intValue", intParameter));
+
 ```
 
 #### RegisterModuleWithArgs
@@ -516,12 +553,12 @@ builder.RegisterModuleWithArgs<TestModule>(
 Harmony is no longer used in ZenAutofac due to unstable behavior when writing unit tests and incompatibility with environments like IL2CPP that do not support runtime patching.
 
 #### Disposer Related
-As mentioned earlier, every instance resolved from a subcontainer must implement the `IDisposer` interface.  
+As mentioned earlier, every instance resolved from a subcontainer must implement the `IDisposer` interface.
 The subcontainer will be disposed when that instance is disposed.
 
 `IDisposer` is required to attach a subcontainer to an instance using the `IDisposer.AddInstanceForDisposal` method.
 
-To implement `IDisposer`, you can use composition:  
+To implement `IDisposer`, you can use composition:
 implement `IDisposer` on your entity and forward all `IDisposer` method calls to `ZenAutofac.Entities.Disposer`.
 
 Be aware that registered instances will be disposed in the same order in which they were added.
