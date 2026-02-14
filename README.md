@@ -537,6 +537,18 @@ builder.RegisterModuleWithArgs<TestModule>(
 
 ```
 
+#### RegisterModuleWithArgs
+Used to register module in autofac style, don't pass any dependencies from DI. Only one provided in parameters.  
+
+```csharp
+var builder = new ContainerBuilder();
+
+builder.RegisterModuleWithArgs<TestModule>(
+                new NamedParameter("stringValue", stringParameter),
+                new NamedParameter("intValue", intParameter));
+
+```
+
 #### HarmonyPatch Related
 Harmony is no longer used in ZenAutofac due to unstable behavior when writing unit tests and incompatibility with environments like IL2CPP that do not support runtime patching.
 
